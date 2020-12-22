@@ -46,7 +46,6 @@
 		08FDF57A255A9DB200640DDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08FDF59C255AA3DC00640DDF /* TDItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDItem.swift; sourceTree = "<group>"; };
 		08FDF5A0255AA4CD00640DDF /* TDDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDDetailViewController.swift; sourceTree = "<group>"; };
-		08FDF5AC255AA7C800640DDF /* TDDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDDBManager.swift; sourceTree = "<group>"; };
 		4014CC37CD4A3CDE154FBF63 /* Pods-ToDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDo.release.xcconfig"; path = "Target Support Files/Pods-ToDo/Pods-ToDo.release.xcconfig"; sourceTree = "<group>"; };
 		5716BDABB8B166FECF09A81F /* Pods-ToDoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoTests.debug.xcconfig"; path = "Target Support Files/Pods-ToDoTests/Pods-ToDoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		868C3AF8D5E622D90712AF07 /* Pods_ToDoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				08FDF59B255AA33300640DDF /* Storyboards */,
-				08FDF59A255AA30C00640DDF /* ViewController */,
+				08FDF59A255AA30C00640DDF /* Controller */,
 				08FDF599255AA30300640DDF /* View */,
 				08FDF598255AA2FC00640DDF /* Model */,
 				08FDF555255A8E4F00640DDF /* AppDelegate.swift */,
@@ -123,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				08FDF59C255AA3DC00640DDF /* TDItem.swift */,
-				08FDF5AC255AA7C800640DDF /* TDDBManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -136,13 +134,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		08FDF59A255AA30C00640DDF /* ViewController */ = {
+		08FDF59A255AA30C00640DDF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				08FDF559255A8E4F00640DDF /* TDTableViewController.swift */,
 				08FDF5A0255AA4CD00640DDF /* TDDetailViewController.swift */,
 			);
-			path = ViewController;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		08FDF59B255AA33300640DDF /* Storyboards */ = {

@@ -4,7 +4,8 @@
 target 'ToDo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-pod 'RealmSwift'
+
+  pod 'RealmSwift'
   # Pods for ToDo
 
   target 'ToDoTests' do
