@@ -14,28 +14,20 @@ class TDItem: Object {
     @objc dynamic var title = ""
     @objc dynamic var descript = ""
     @objc dynamic var date: Date = Date()
+    @objc dynamic var startDate: Date?
+    @objc dynamic var endDate: Date?
     
-    convenience init (id: Int, title: String, descript: String) {
+    convenience init (id: Int, title: String, descript: String, startDate: Date, endDate: Date) {
         self.init()
         self.id = id
         self.title = title
         self.descript = descript
+        self.startDate = startDate
+        self.endDate = endDate
     }
     
     override class func primaryKey() -> String? {
         return "id"
     }
-    
-//    let id: Int
-//    let title: String?
-//    let description: String?
-//    let date: String?
-//
-//    init(id: Int, title: String?, description: String?, date: String?) {
-//        self.id = id
-//        self.title = title
-//        self.description = description
-//        self.date = date
-//    }
 }
 
