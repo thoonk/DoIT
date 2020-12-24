@@ -16,6 +16,8 @@ class TDItem: Object {
     @objc dynamic var date: Date = Date()
     @objc dynamic var startDate: Date?
     @objc dynamic var endDate: Date?
+    @objc dynamic var isComplete: Bool = false
+    @objc dynamic var isEmphasis: Bool = false
     
     convenience init (id: Int, title: String, descript: String, startDate: Date, endDate: Date) {
         self.init()
