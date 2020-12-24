@@ -11,16 +11,12 @@ import RealmSwift
 class TDTableViewController: UIViewController {
         
     var items: Results<TDItem>?
-    
     let realm = try? Realm()
-    
-    let cellIdentifier: String = "tableCell"
-    let segueIdentifier: String = "toDetailFromTable"
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func writeBtnPressed(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: segueIdentifier, sender: nil)
+        performSegue(withIdentifier: C.detailFromTable, sender: nil)
     }
     
     @IBAction func folderBtnPressed(_ sender: UIBarButtonItem) {
@@ -45,7 +41,7 @@ class TDTableViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueIdentifier {
+        if segue.identifier == C.detailFromTable {
             if let vc = segue.destination as? TDDetailViewController, let item = sender as? TDItem {
                 vc.item = item
             }
@@ -74,11 +70,17 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TDTableViewCell else {
+        guard let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.tableCell, for: indexPath) as? TDTableViewCell else {
             return UITableViewCell()
         }
         if let data = items?[indexPath.row]{
             cell.mappingData(data)
+            
+            if data.isEmphasis == false {
+                cell.markImageView.isHidden = true
+            } else {
+                cell.markImageView.isHidden = false
+            }
         }
         return cell
     }
@@ -86,48 +88,84 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
     /// tableViewCell 오른쪽에서 왼쪽으로 스와이프해서 삭제
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        let completeAction = UIContextualAction(style: .normal, title: "Complete") { (contextualAction, view, isSuccess) in
+            do {
+                
+                if let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.tableCell, for: indexPath) as? TDTableViewCell {
+
+                    let title = NSMutableAttributedString(string: cell.titleLabel.text ?? "")
+                    let attrs = [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue]
+                    title.addAttributes(attrs, range: NSRange(location: 0, length: title.length))
+                    cell.titleLabel.attributedText = title
+                }
+                
+                let item = self.items?[indexPath.row]
+
+                try self.realm?.write{
+                    item?.isComplete = true
+                    self.tableView.reloadData()
+                }
+            } catch {
+                print(error)
+            }
+        }
         
-        let contextItem = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, view, boolValue) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, view, isSuccess) in
             do {
                 try self.realm?.write{
                     self.realm?.delete(self.items![indexPath.row])
                     self.tableView.reloadData()
                 }
             } catch {
-                print("\(error)")
+                print(error)
             }
         }
         
-        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+        completeAction.backgroundColor = .blue
+        
+        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction, completeAction])
         return swipeActions
     }
     
     /// tableViewCell 왼쪽에서 오른쪽으로 스와이프해서 하이라이트
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let cell = tableView.cellForRow(at: indexPath)!
         
-        let contextItem = UIContextualAction(style: .normal, title: "강조", handler: {(ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            
-            if cell.backgroundColor != UIColor.red {
-                cell.backgroundColor = UIColor.red
-            } else if cell.backgroundColor == UIColor.red {
-                if self.traitCollection.userInterfaceStyle == .dark {
-                    cell.backgroundColor = UIColor.black
-                } else {
-                    cell.backgroundColor = UIColor.white
+        let emphasisAction = UIContextualAction(style: .normal, title: "Emphasis") { (contextualAction, view, isSuccess) in
+
+            do{
+                if let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.tableCell, for: indexPath) as? TDTableViewCell {
+                                
+                    let item = self.items?[indexPath.row]
+
+                    if item?.isEmphasis == false {
+                        try self.realm?.write{
+                            item?.isEmphasis = true
+                            self.tableView.reloadData()
+                        }
+                        cell.markImageView.isHidden = true
+                    } else {
+                        try self.realm?.write{
+                            item?.isEmphasis = false
+                            self.tableView.reloadData()
+                        }
+                        cell.markImageView.isHidden = false
+                    }
                 }
+            } catch {
+                print(error)
             }
-            success(true)
-        })
-        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+        }
+            
+        let swipeActions = UISwipeActionsConfiguration(actions: [emphasisAction])
         return swipeActions
     }
     
     // 선택된 cell의 정보로 DetailVC로 화면 전환
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = items?[indexPath.row]
-        performSegue(withIdentifier: segueIdentifier, sender: item)
+        performSegue(withIdentifier: C.detailFromTable, sender: item)
+        
     }
 }
 
