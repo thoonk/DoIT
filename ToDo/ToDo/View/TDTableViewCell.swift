@@ -10,6 +10,8 @@ import UIKit
 class TDTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var markImageView: UIImageView!
+    
 //    @IBOutlet weak var dateLabel: UILabel!
     
 //    private lazy var dateFormmater: DateFormatter = {
