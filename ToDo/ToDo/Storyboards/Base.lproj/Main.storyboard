@@ -27,22 +27,37 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZg-rM-gzs">
-                                                    <rect key="frame" x="60" y="11" width="300" height="21.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="300" id="HgG-Xs-0AW"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cV0-sJ-dUx">
+                                                    <rect key="frame" x="67" y="7" width="280" height="30"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZg-rM-gzs">
+                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="250" id="HgG-Xs-0AW"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Tgu-GF-ceI">
+                                                            <rect key="frame" x="250" y="-0.5" width="30" height="30"/>
+                                                            <color key="tintColor" systemColor="labelColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="30" id="Of3-j8-Vmw"/>
+                                                                <constraint firstAttribute="height" constant="30" id="c0p-lH-zjT"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="jZg-rM-gzs" firstAttribute="leading" secondItem="J25-nL-DSS" secondAttribute="leading" constant="60" id="0ar-eD-HTJ"/>
-                                                <constraint firstItem="jZg-rM-gzs" firstAttribute="top" secondItem="J25-nL-DSS" secondAttribute="topMargin" id="W2e-WH-lzP"/>
+                                                <constraint firstItem="cV0-sJ-dUx" firstAttribute="leading" secondItem="J25-nL-DSS" secondAttribute="leading" constant="67" id="O72-hV-S7p"/>
+                                                <constraint firstAttribute="trailing" secondItem="cV0-sJ-dUx" secondAttribute="trailing" constant="67" id="cgD-rs-Ln6"/>
+                                                <constraint firstItem="cV0-sJ-dUx" firstAttribute="top" secondItem="J25-nL-DSS" secondAttribute="top" constant="7" id="eMm-zb-1yg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="markImageView" destination="Tgu-GF-ceI" id="Ivc-yZ-GyF"/>
                                             <outlet property="titleLabel" destination="jZg-rM-gzs" id="fvb-1u-SXn"/>
                                         </connections>
                                     </tableViewCell>
@@ -71,7 +86,7 @@
                         <barButtonItem key="rightBarButtonItem" springLoaded="YES" systemItem="compose" id="f0h-uu-GFu">
                             <connections>
                                 <action selector="writeBtnPressed:" destination="BYZ-38-t0r" id="IU0-MK-clp"/>
-                                <segue destination="E0m-SS-JIJ" kind="show" identifier="toDetailFromTable" id="t61-q8-m5W"/>
+                                <segue destination="E0m-SS-JIJ" kind="show" identifier="detailFromTable" id="t61-q8-m5W"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -98,25 +113,25 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WYT-h9-tE0" userLabel="InfoView">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="193.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="CCq-bF-LdP">
+                                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CCq-bF-LdP">
                                                 <rect key="frame" x="37" y="0.0" width="300" height="193.5"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Title" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Suh-nV-Fl5">
-                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="46.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="58"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Memo" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xgB-1d-gks">
-                                                        <rect key="frame" x="0.0" y="73.5" width="300" height="46.5"/>
+                                                        <rect key="frame" x="0.0" y="68" width="300" height="57.5"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registeration Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kci-6s-whX">
-                                                        <rect key="frame" x="0.0" y="147" width="300" height="46.5"/>
+                                                        <rect key="frame" x="0.0" y="135.5" width="300" height="58"/>
                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -258,6 +273,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
