@@ -192,18 +192,21 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cgu-G3-riV" userLabel="ResultView">
                                         <rect key="frame" x="0.0" y="416.5" width="374" height="193.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="dnW-T6-FXU">
-                                                <rect key="frame" x="37" y="32" width="300" height="158"/>
+                                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dnW-T6-FXU">
+                                                <rect key="frame" x="37" y="32" width="300" height="145"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hy6-gS-M9D">
-                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="64"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="24"/>
                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="예정된 마감시간보다 5초 더 소요되었습니다. " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="s2a-WH-ZrL">
-                                                        <rect key="frame" x="0.0" y="94" width="300" height="64"/>
+                                                    <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" text="To see the result time, please complete the task first!!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="s2a-WH-ZrL">
+                                                        <rect key="frame" x="0.0" y="34" width="300" height="111"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="111" id="gsx-DN-rt3"/>
+                                                        </constraints>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -214,6 +217,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="dnW-T6-FXU" secondAttribute="trailing" constant="37" id="F6i-dC-CTq"/>
+                                            <constraint firstAttribute="bottom" secondItem="dnW-T6-FXU" secondAttribute="bottom" constant="16.5" id="r51-gY-9Yn"/>
                                             <constraint firstItem="dnW-T6-FXU" firstAttribute="top" secondItem="cgu-G3-riV" secondAttribute="top" constant="32" id="tiE-pT-TZy"/>
                                             <constraint firstItem="dnW-T6-FXU" firstAttribute="leading" secondItem="cgu-G3-riV" secondAttribute="leading" constant="37" id="yUj-W2-fWm"/>
                                         </constraints>
