@@ -14,8 +14,9 @@ class TDItem: Object {
     @objc dynamic var title = ""
     @objc dynamic var descript = ""
     @objc dynamic var date: Date = Date()
-    @objc dynamic var startDate: Date?
-    @objc dynamic var endDate: Date?
+    @objc dynamic var startDate: Date = Date()
+    @objc dynamic var endDate: Date = Date()
+    @objc dynamic var completeDate: Date?
     @objc dynamic var isComplete: Bool = false
     @objc dynamic var isEmphasis: Bool = false
     
