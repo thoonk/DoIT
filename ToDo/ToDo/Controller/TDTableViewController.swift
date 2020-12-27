@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 class TDTableViewController: UIViewController {
-        
+    
     var items: Results<TDItem>?
     let realm = try? Realm()
     
@@ -29,7 +29,7 @@ class TDTableViewController: UIViewController {
         items = realm?.objects(TDItem.self).sorted(byKeyPath: "id", ascending: true)
         self.tableView.reloadData()
     }
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,9 +49,9 @@ class TDTableViewController: UIViewController {
     }
 }
 
+// MARK: - TableView
 extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
     
-    // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let cnt = items?.count{
             return cnt
@@ -81,6 +81,12 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 cell.markImageView.isHidden = false
             }
+            
+            if data.isComplete == true {
+                cell.titleLabel.attributedText = cell.titleLabel.text?.strikeThrough()
+            } else {
+                cell.titleLabel.text = data.title
+            }
         }
         return cell
     }
@@ -88,28 +94,41 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
     /// tableViewCell 오른쪽에서 왼쪽으로 스와이프해서 삭제
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        // 완료 / 미완료
         let completeAction = UIContextualAction(style: .normal, title: "Complete") { (contextualAction, view, isSuccess) in
             do {
                 
-                if let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.tableCell, for: indexPath) as? TDTableViewCell {
-
-                    let title = NSMutableAttributedString(string: cell.titleLabel.text ?? "")
-                    let attrs = [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue]
-                    title.addAttributes(attrs, range: NSRange(location: 0, length: title.length))
-                    cell.titleLabel.attributedText = title
-                }
-                
-                let item = self.items?[indexPath.row]
-
-                try self.realm?.write{
-                    item?.isComplete = true
-                    self.tableView.reloadData()
+                if let item = self.items?[indexPath.row] {
+                    if item.isComplete == false {
+                        
+                        try self.realm?.write{
+                            item.isComplete = true
+                            item.completeDate = Date()
+                        }
+                        
+                        if let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.tableCell, for: indexPath) as? TDTableViewCell {
+                            cell.titleLabel.attributedText = cell.titleLabel.text?.strikeThrough()
+                            self.tableView.reloadData()
+                        }
+                    } else {
+                        
+                        try self.realm?.write {
+                            item.isComplete = false
+                            item.completeDate = nil
+                        }
+                        
+                        if let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.tableCell, for: indexPath) as? TDTableViewCell {
+                            cell.mappingData(item)
+                            self.tableView.reloadData()
+                        }
+                    }
                 }
             } catch {
                 print(error)
             }
         }
         
+        // 할 일 삭제
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, view, isSuccess) in
             do {
                 try self.realm?.write{
@@ -130,14 +149,14 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
     /// tableViewCell 왼쪽에서 오른쪽으로 스와이프해서 하이라이트
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        
+        // 강조 / 강조 취소
         let emphasisAction = UIContextualAction(style: .normal, title: "Emphasis") { (contextualAction, view, isSuccess) in
-
+            
             do{
                 if let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.tableCell, for: indexPath) as? TDTableViewCell {
-                                
+                    
                     let item = self.items?[indexPath.row]
-
+                    
                     if item?.isEmphasis == false {
                         try self.realm?.write{
                             item?.isEmphasis = true
@@ -156,7 +175,7 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
                 print(error)
             }
         }
-            
+        
         let swipeActions = UISwipeActionsConfiguration(actions: [emphasisAction])
         return swipeActions
     }
