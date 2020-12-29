@@ -22,6 +22,33 @@ class TDTableViewController: UIViewController {
     @IBAction func folderBtnPressed(_ sender: UIBarButtonItem) {
         
     }
+    @IBAction func completeBtnPressed(_ sender: UIButton) {
+        
+        let contentView = sender.superview?.superview
+        let cell: TDTableViewCell = contentView?.superview as! TDTableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+
+        if let item = items?[indexPath!.row] {
+            if item.isComplete == false {
+
+                try! self.realm?.write{
+                    item.isComplete = true
+                    item.completeDate = Date()
+                }
+                
+                sender.setImage(UIImage(systemName: "largecircle.fill.circle"), for: .normal)
+
+            } else {
+
+                try! self.realm?.write {
+                    item.isComplete = false
+                    item.completeDate = nil
+                }
+                
+                sender.setImage(UIImage(systemName: "circle"), for: .normal)
+            }
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -76,6 +103,7 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
         if let data = items?[indexPath.row]{
             cell.mappingData(data)
             
+            
             if data.isEmphasis == false {
                 cell.markImageView.isHidden = true
             } else {
@@ -83,9 +111,9 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             if data.isComplete == true {
-                cell.titleLabel.attributedText = cell.titleLabel.text?.strikeThrough()
+                cell.completeButton.setImage(UIImage(systemName: "largecircle.fill.circle"), for: .normal)
             } else {
-                cell.titleLabel.text = data.title
+                cell.completeButton.setImage(UIImage(systemName: "circle"), for: .normal)
             }
         }
         return cell
@@ -93,41 +121,7 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     /// tableViewCell 오른쪽에서 왼쪽으로 스와이프해서 삭제
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        // 완료 / 미완료
-        let completeAction = UIContextualAction(style: .normal, title: "Complete") { (contextualAction, view, isSuccess) in
-            do {
                 
-                if let item = self.items?[indexPath.row] {
-                    if item.isComplete == false {
-                        
-                        try self.realm?.write{
-                            item.isComplete = true
-                            item.completeDate = Date()
-                        }
-                        
-                        if let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.tableCell, for: indexPath) as? TDTableViewCell {
-                            cell.titleLabel.attributedText = cell.titleLabel.text?.strikeThrough()
-                            self.tableView.reloadData()
-                        }
-                    } else {
-                        
-                        try self.realm?.write {
-                            item.isComplete = false
-                            item.completeDate = nil
-                        }
-                        
-                        if let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.tableCell, for: indexPath) as? TDTableViewCell {
-                            cell.mappingData(item)
-                            self.tableView.reloadData()
-                        }
-                    }
-                }
-            } catch {
-                print(error)
-            }
-        }
-        
         // 할 일 삭제
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, view, isSuccess) in
             do {
@@ -139,10 +133,8 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
                 print(error)
             }
         }
-        
-        completeAction.backgroundColor = .blue
-        
-        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction, completeAction])
+                
+        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
         return swipeActions
     }
     
@@ -160,17 +152,16 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
                     if item?.isEmphasis == false {
                         try self.realm?.write{
                             item?.isEmphasis = true
-                            self.tableView.reloadData()
                         }
                         cell.markImageView.isHidden = true
                     } else {
                         try self.realm?.write{
                             item?.isEmphasis = false
-                            self.tableView.reloadData()
                         }
                         cell.markImageView.isHidden = false
                     }
                 }
+                tableView.reloadData()
             } catch {
                 print(error)
             }
