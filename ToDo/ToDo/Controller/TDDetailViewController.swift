@@ -17,6 +17,8 @@ class TDDetailViewController: UIViewController {
     var startDate: Date = Date()
     var endDate: Date = Date()
     
+    let notiManager = TDNotiManager()
+    
     @IBOutlet weak var titleTextView: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descTextView: UITextView!
@@ -36,6 +38,11 @@ class TDDetailViewController: UIViewController {
             alertOutOfDate("End Date must be set later than the Start Date")
         } else {
             saveItem()
+            if let item = self.item {
+                notiManager.addNoti(title: item.title, body: C.notiBody.startBody, date: item.startDate.alertTime())
+                notiManager.addNoti(title: item.title, body: C.notiBody.endBody, date: item.endDate.alertTime())
+                notiManager.scheduleNoti()
+            }
         }
     }
     
@@ -53,13 +60,17 @@ class TDDetailViewController: UIViewController {
             loadItem()
         }
         
-        textViewUI(view: infoView)
-        textViewUI(view: dateView)
-        textViewUI(view: resultView)
+        viewUI(view: infoView)
+        viewUI(view: dateView)
+        viewUI(view: resultView)
+        
+        titleTextView.backgroundColor = UIColor.darkGray
+        descTextView.backgroundColor = UIColor.darkGray
+        resultTextView.backgroundColor = UIColor.darkGray
         
         // DatePicker에서 고를 수 있는 최소 날짜 설정
-        startDatePicker.minimumDate = currentDate
-        endDatePicker.minimumDate = currentDate
+//        startDatePicker.minimumDate = currentDate
+//        endDatePicker.minimumDate = currentDate
         
         computeDate()
         
@@ -69,8 +80,10 @@ class TDDetailViewController: UIViewController {
             startDatePicker.isUserInteractionEnabled = false
             endDatePicker.isUserInteractionEnabled = false
         }
-//        print(result)
-        //resultTextView.text = "\(result)"
+        
+        notiManager.requestNotiAuth()
+        
+       
     }
     
     // 할 일을 완료하면 날짜 계산해서 보여줌
@@ -106,7 +119,7 @@ class TDDetailViewController: UIViewController {
         present(alert, animated: false, completion: nil)
     }
     
-    func textViewUI(view: UIView) {
+    func viewUI(view: UIView) {
         //        view.layer.borderWidth = 1
         view.layer.cornerRadius = 5
         view.layer.backgroundColor = UIColor.darkGray.cgColor
