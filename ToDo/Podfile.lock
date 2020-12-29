@@ -1,46 +1,22 @@
 PODS:
-  - MaterialComponents/Availability (119.3.0)
-  - MaterialComponents/Elevation (119.3.0):
-    - MaterialComponents/Availability
-    - MaterialComponents/private/Color
-    - MaterialComponents/private/Math
-  - MaterialComponents/NavigationDrawer (119.3.0):
-    - MaterialComponents/Elevation
-    - MaterialComponents/Palettes
-    - MaterialComponents/private/Math
-    - MaterialComponents/private/UIMetrics
-    - MaterialComponents/ShadowLayer
-  - MaterialComponents/Palettes (119.3.0)
-  - MaterialComponents/private/Application (119.3.0)
-  - MaterialComponents/private/Color (119.3.0):
-    - MaterialComponents/Availability
-  - MaterialComponents/private/Math (119.3.0)
-  - MaterialComponents/private/UIMetrics (119.3.0):
-    - MaterialComponents/private/Application
-  - MaterialComponents/ShadowElevations (119.3.0)
-  - MaterialComponents/ShadowLayer (119.3.0):
-    - MaterialComponents/ShadowElevations
-  - Realm (10.1.2):
-    - Realm/Headers (= 10.1.2)
-  - Realm/Headers (10.1.2)
-  - RealmSwift (10.1.2):
-    - Realm (= 10.1.2)
+  - Realm (10.5.0):
+    - Realm/Headers (= 10.5.0)
+  - Realm/Headers (10.5.0)
+  - RealmSwift (10.5.0):
+    - Realm (= 10.5.0)
 
 DEPENDENCIES:
-  - MaterialComponents/NavigationDrawer
   - RealmSwift
 
 SPEC REPOS:
   trunk:
-    - MaterialComponents
     - Realm
     - RealmSwift
 
 SPEC CHECKSUMS:
-  MaterialComponents: 49658f0fd7ef6e098e9943fce3f293e700595570
-  Realm: 031fdd4be7094d01b43af1a5e49766ab644bb800
-  RealmSwift: 43cf2e114baa9d17d34eb81e7d0def31f21cd444
+  Realm: e1c22c3d83b229afb70ebc10e1771c91e9542d12
+  RealmSwift: 6fc078d9d3fd7e58c71bfdbb694e252462f112a5
 
-PODFILE CHECKSUM: ff0bc7ae98f99a314a1a05247aa5e15a2eafe81d
+PODFILE CHECKSUM: e2481bed4aba7f34529f0f06edeffd6c3f1547a3
 
 COCOAPODS: 1.10.0
