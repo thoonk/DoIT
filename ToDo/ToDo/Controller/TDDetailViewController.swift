@@ -11,7 +11,6 @@ import RealmSwift
 class TDDetailViewController: UIViewController {
     
     var item: TDItem?
-    let realm = try? Realm()
     
     let currentDate: Date = Date()
     var startDate: Date = Date()
@@ -43,6 +42,7 @@ class TDDetailViewController: UIViewController {
                 notiManager.addNoti(title: item.title, body: C.notiBody.endBody, date: item.endDate.alertTime())
                 notiManager.scheduleNoti()
             }
+            navigationController?.popViewController(animated: true)
         }
     }
     
@@ -58,6 +58,7 @@ class TDDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         if item != nil{
             loadItem()
+            computeDate()
         }
         
         viewUI(view: infoView)
@@ -68,12 +69,6 @@ class TDDetailViewController: UIViewController {
         descTextView.backgroundColor = UIColor.darkGray
         resultTextView.backgroundColor = UIColor.darkGray
         
-        // DatePicker에서 고를 수 있는 최소 날짜 설정
-//        startDatePicker.minimumDate = currentDate
-//        endDatePicker.minimumDate = currentDate
-        
-        computeDate()
-        
         if let item = self.item, item.isComplete == true {
             titleTextView.isUserInteractionEnabled = false
             descTextView.isUserInteractionEnabled = false
@@ -82,8 +77,6 @@ class TDDetailViewController: UIViewController {
         }
         
         notiManager.requestNotiAuth()
-        
-       
     }
     
     // 할 일을 완료하면 날짜 계산해서 보여줌
@@ -125,15 +118,12 @@ class TDDetailViewController: UIViewController {
         view.layer.backgroundColor = UIColor.darkGray.cgColor
     }
     
-    // MARK: - Realm 처리 메서드
-    
     func saveItem() {
         if item == nil {
-            insertItem()
+            TDItemManager.shared.insertItem(titleTextView: titleTextView, descTextView: descTextView, startDate: startDate, endDate: endDate)
         } else {
-            updateItem()
+            TDItemManager.shared.updateItem(item: item, titleTextView: titleTextView, descTextView: descTextView, startDate: startDate, endDate: endDate)
         }
-        navigationController?.popViewController(animated: true)
     }
     
     func loadItem() {
@@ -147,31 +137,6 @@ class TDDetailViewController: UIViewController {
             startDatePicker.setDate(data.startDate, animated: false)
             endDatePicker.setDate(data.endDate, animated: false)
         }
-    }
-    
-    func insertItem(){
-        if let id = incrementID(),
-           let title = titleTextView.text,
-           let desc = descTextView.text {
-            item = TDItem(id: id, title: title, descript: desc, startDate: startDate, endDate: endDate)
-            try! realm?.write{
-                realm?.add(item ?? TDItem())
-            }
-        }
-    }
-    
-    func updateItem() {
-        if let title = titleTextView.text,
-           let desc = descTextView.text {
-            item = TDItem(id: item!.id, title: title, descript: desc, startDate: startDate, endDate: endDate)
-            try! realm?.write {
-                realm?.add(item ?? TDItem(), update: .modified)
-            }
-        }
-    }
-    
-    func incrementID() -> Int?{
-        return (realm?.objects(TDItem.self).max(ofProperty: "id") as Int? ?? 0) + 1
     }
 }
 

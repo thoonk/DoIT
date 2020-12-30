@@ -9,6 +9,7 @@ import UIKit
 
 class TDTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var completeButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var markImageView: UIImageView!

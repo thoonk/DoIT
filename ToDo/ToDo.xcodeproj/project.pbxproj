@@ -10,6 +10,7 @@
 		0809ED7325949E1600A00434 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809ED7225949E1600A00434 /* Constants.swift */; };
 		084B7830259B19A600443BA5 /* TDNotiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B782F259B19A600443BA5 /* TDNotiManager.swift */; };
 		0883CE682598C077004550D1 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883CE672598C077004550D1 /* String.swift */; };
+		088F0C71259C718700FFE820 /* TDItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F0C70259C718700FFE820 /* TDItemManager.swift */; };
 		089034EE259898C4002CA0DB /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089034ED259898C4002CA0DB /* Date.swift */; };
 		08FDF556255A8E4F00640DDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF555255A8E4F00640DDF /* AppDelegate.swift */; };
 		08FDF558255A8E4F00640DDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF557255A8E4F00640DDF /* SceneDelegate.swift */; };
@@ -39,6 +40,7 @@
 		0809ED7225949E1600A00434 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		084B782F259B19A600443BA5 /* TDNotiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDNotiManager.swift; sourceTree = "<group>"; };
 		0883CE672598C077004550D1 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		088F0C70259C718700FFE820 /* TDItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDItemManager.swift; sourceTree = "<group>"; };
 		089034ED259898C4002CA0DB /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		08FDF552255A8E4F00640DDF /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08FDF555255A8E4F00640DDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		088F0C74259CB5A400FFE820 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				08FDF557255A8E4F00640DDF /* SceneDelegate.swift */,
+				08FDF555255A8E4F00640DDF /* AppDelegate.swift */,
+				08FDF55E255A8E4F00640DDF /* Assets.xcassets */,
+				08FDF563255A8E4F00640DDF /* Info.plist */,
+				0809ED7225949E1600A00434 /* Constants.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
 		089034EC259898B6002CA0DB /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,16 +128,11 @@
 		08FDF554255A8E4F00640DDF /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
+				088F0C74259CB5A400FFE820 /* Others */,
 				089034EC259898B6002CA0DB /* Extension */,
-				08FDF59B255AA33300640DDF /* Storyboards */,
 				08FDF59A255AA30C00640DDF /* Controller */,
 				08FDF599255AA30300640DDF /* View */,
 				08FDF598255AA2FC00640DDF /* Model */,
-				08FDF557255A8E4F00640DDF /* SceneDelegate.swift */,
-				08FDF555255A8E4F00640DDF /* AppDelegate.swift */,
-				08FDF55E255A8E4F00640DDF /* Assets.xcassets */,
-				08FDF563255A8E4F00640DDF /* Info.plist */,
-				0809ED7225949E1600A00434 /* Constants.swift */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -142,6 +151,7 @@
 			children = (
 				08FDF59C255AA3DC00640DDF /* TDItem.swift */,
 				084B782F259B19A600443BA5 /* TDNotiManager.swift */,
+				088F0C70259C718700FFE820 /* TDItemManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -149,6 +159,8 @@
 		08FDF599255AA30300640DDF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				08FDF560255A8E4F00640DDF /* LaunchScreen.storyboard */,
+				08FDF55B255A8E4F00640DDF /* Main.storyboard */,
 				08FDF56B255A959B00640DDF /* TDTableViewCell.swift */,
 			);
 			path = View;
@@ -161,15 +173,6 @@
 				08FDF5A0255AA4CD00640DDF /* TDDetailViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		08FDF59B255AA33300640DDF /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				08FDF560255A8E4F00640DDF /* LaunchScreen.storyboard */,
-				08FDF55B255A8E4F00640DDF /* Main.storyboard */,
-			);
-			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		1AEF44E73E64D43AD457B4E6 /* Frameworks */ = {
@@ -362,6 +365,7 @@
 				08FDF55A255A8E4F00640DDF /* TDTableViewController.swift in Sources */,
 				084B7830259B19A600443BA5 /* TDNotiManager.swift in Sources */,
 				08FDF556255A8E4F00640DDF /* AppDelegate.swift in Sources */,
+				088F0C71259C718700FFE820 /* TDItemManager.swift in Sources */,
 				08FDF59D255AA3DC00640DDF /* TDItem.swift in Sources */,
 				0883CE682598C077004550D1 /* String.swift in Sources */,
 				089034EE259898C4002CA0DB /* Date.swift in Sources */,
@@ -534,7 +538,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U59PP2KXJ5;
-				INFOPLIST_FILE = Todo/Info.plist;
+				INFOPLIST_FILE = Todo/Others/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -554,7 +558,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U59PP2KXJ5;
-				INFOPLIST_FILE = Todo/Info.plist;
+				INFOPLIST_FILE = Todo/Others/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
