@@ -9,9 +9,13 @@
 /* Begin PBXBuildFile section */
 		0809ED7325949E1600A00434 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809ED7225949E1600A00434 /* Constants.swift */; };
 		084B7830259B19A600443BA5 /* TDNotiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B782F259B19A600443BA5 /* TDNotiManager.swift */; };
+		08704BDB25A052AA003358C1 /* DescTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08704BDA25A052AA003358C1 /* DescTableViewCell.swift */; };
 		0883CE682598C077004550D1 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883CE672598C077004550D1 /* String.swift */; };
 		088F0C71259C718700FFE820 /* TDItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F0C70259C718700FFE820 /* TDItemManager.swift */; };
 		089034EE259898C4002CA0DB /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089034ED259898C4002CA0DB /* Date.swift */; };
+		0899239A259DE8E000D1A8A1 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08992399259DE8E000D1A8A1 /* TitleTableViewCell.swift */; };
+		0899239E259DE8EA00D1A8A1 /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899239D259DE8EA00D1A8A1 /* DateTableViewCell.swift */; };
+		089923A2259DE8F000D1A8A1 /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089923A1259DE8F000D1A8A1 /* ResultTableViewCell.swift */; };
 		08FDF556255A8E4F00640DDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF555255A8E4F00640DDF /* AppDelegate.swift */; };
 		08FDF558255A8E4F00640DDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF557255A8E4F00640DDF /* SceneDelegate.swift */; };
 		08FDF55A255A8E4F00640DDF /* TDTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF559255A8E4F00640DDF /* TDTableViewController.swift */; };
@@ -39,9 +43,13 @@
 /* Begin PBXFileReference section */
 		0809ED7225949E1600A00434 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		084B782F259B19A600443BA5 /* TDNotiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDNotiManager.swift; sourceTree = "<group>"; };
+		08704BDA25A052AA003358C1 /* DescTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescTableViewCell.swift; sourceTree = "<group>"; };
 		0883CE672598C077004550D1 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		088F0C70259C718700FFE820 /* TDItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDItemManager.swift; sourceTree = "<group>"; };
 		089034ED259898C4002CA0DB /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		08992399259DE8E000D1A8A1 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
+		0899239D259DE8EA00D1A8A1 /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
+		089923A1259DE8F000D1A8A1 /* ResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
 		08FDF552255A8E4F00640DDF /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08FDF555255A8E4F00640DDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08FDF557255A8E4F00640DDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,6 +170,10 @@
 				08FDF560255A8E4F00640DDF /* LaunchScreen.storyboard */,
 				08FDF55B255A8E4F00640DDF /* Main.storyboard */,
 				08FDF56B255A959B00640DDF /* TDTableViewCell.swift */,
+				08992399259DE8E000D1A8A1 /* TitleTableViewCell.swift */,
+				08704BDA25A052AA003358C1 /* DescTableViewCell.swift */,
+				0899239D259DE8EA00D1A8A1 /* DateTableViewCell.swift */,
+				089923A1259DE8F000D1A8A1 /* ResultTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -364,6 +376,8 @@
 			files = (
 				08FDF55A255A8E4F00640DDF /* TDTableViewController.swift in Sources */,
 				084B7830259B19A600443BA5 /* TDNotiManager.swift in Sources */,
+				08704BDB25A052AA003358C1 /* DescTableViewCell.swift in Sources */,
+				089923A2259DE8F000D1A8A1 /* ResultTableViewCell.swift in Sources */,
 				08FDF556255A8E4F00640DDF /* AppDelegate.swift in Sources */,
 				088F0C71259C718700FFE820 /* TDItemManager.swift in Sources */,
 				08FDF59D255AA3DC00640DDF /* TDItem.swift in Sources */,
@@ -371,6 +385,8 @@
 				089034EE259898C4002CA0DB /* Date.swift in Sources */,
 				08FDF5A1255AA4CD00640DDF /* TDDetailViewController.swift in Sources */,
 				0809ED7325949E1600A00434 /* Constants.swift in Sources */,
+				0899239E259DE8EA00D1A8A1 /* DateTableViewCell.swift in Sources */,
+				0899239A259DE8E000D1A8A1 /* TitleTableViewCell.swift in Sources */,
 				08FDF558255A8E4F00640DDF /* SceneDelegate.swift in Sources */,
 				08FDF56C255A959B00640DDF /* TDTableViewCell.swift in Sources */,
 			);
