@@ -18,31 +18,28 @@ class TDDetailViewController: UIViewController {
     
     let notiManager = TDNotiManager()
     
-    @IBOutlet weak var titleTextView: UITextView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var descTextView: UITextView!
-    @IBOutlet weak var startDatePicker: UIDatePicker!
     
-    @IBOutlet weak var endDatePicker: UIDatePicker!
-    @IBOutlet weak var resultTextView: UITextView!
-    @IBOutlet weak var infoView: UIView!
-    @IBOutlet weak var dateView: UIView!
-    @IBOutlet weak var resultView: UIView!
     
     @IBAction func completeBtnTapped(_ sender: Any) {
         
         if startDate > endDate {
-            endDatePicker.date = startDate
+            let indexPathForDate = NSIndexPath(row: 0, section: C.DetailSection.date) as IndexPath
+            let dateCell = tableView.cellForRow(at: indexPathForDate) as? DateTableViewCell
+            dateCell?.endDatePicker.setDate(startDate, animated: false)
             endDate = startDate
-            alertOutOfDate("End Date must be set later than the Start Date")
+            alertToUser("End Date must be set later than the Start Date", "")
         } else {
             saveItem()
             if let item = self.item {
-                notiManager.addNoti(title: item.title, body: C.notiBody.startBody, date: item.startDate.alertTime())
-                notiManager.addNoti(title: item.title, body: C.notiBody.endBody, date: item.endDate.alertTime())
+                notiManager.addNoti(title: item.title, body: C.NotiBody.startBody, date: item.startDate.alertTime())
+                notiManager.addNoti(title: item.title, body: C.NotiBody.endBody, date: item.endDate.alertTime())
                 notiManager.scheduleNoti()
             }
+            
             navigationController?.popViewController(animated: true)
+            
         }
     }
     
@@ -53,57 +50,36 @@ class TDDetailViewController: UIViewController {
         endDate = sender.date
     }
     
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        if item != nil{
-            loadItem()
-            computeDate()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        
+        if let item = item {
+            dateLabel.text = dateFormatter.string(from: item.date)
+        } else {
+            dateLabel.text = dateFormatter.string(from: Date())
         }
         
-        viewUI(view: infoView)
-        viewUI(view: dateView)
-        viewUI(view: resultView)
+        tableView.estimatedRowHeight = 200
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
-        titleTextView.backgroundColor = UIColor.darkGray
-        descTextView.backgroundColor = UIColor.darkGray
-        resultTextView.backgroundColor = UIColor.darkGray
-        
-        if let item = self.item, item.isComplete == true {
-            titleTextView.isUserInteractionEnabled = false
-            descTextView.isUserInteractionEnabled = false
-            startDatePicker.isUserInteractionEnabled = false
-            endDatePicker.isUserInteractionEnabled = false
-        }
-        
-        notiManager.requestNotiAuth()
     }
     
-    // 할 일을 완료하면 날짜 계산해서 보여줌
-    func computeDate() {
-        let calendar = Calendar.current
-        
-        if let item = self.item, item.isComplete == true, item.startDate != item.endDate {
-            if item.endDate > item.completeDate! {
-                let time = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: item.completeDate!, to: item.endDate)
-                
-                if case let (year?, month?, day?, hour?, minute?, second?) = (time.year,time.month,time.day,time.hour,time.minute,time.second) {
-                    
-                    self.resultTextView.text = "Year: \(year) Month: \(month) Day: \(day)\n Hour: \(hour) Minute: \(minute) Second: \(second)"
-                }
-            } else {
-                let time = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: item.endDate, to: item.completeDate!)
-                
-                if case let (year?, month?, day?, hour?, minute?, second?) = (time.year,time.month,time.day,time.hour,time.minute,time.second) {
-                    self.resultTextView.text = "\(year)년, \(month)월, \(day)일, \(hour)시, \(minute)분, \(second)초"
-                }
-            }
-        }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
-    /// 종료날짜보다 시작날짜가 더 늦을 경우 알림 메서드
-    func alertOutOfDate(_ message: String) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertController.Style.alert)
+
+    /// 알림 메서드
+    func alertToUser(_ title: String, _ message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         
         let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
             
@@ -112,30 +88,101 @@ class TDDetailViewController: UIViewController {
         present(alert, animated: false, completion: nil)
     }
     
-    func viewUI(view: UIView) {
-        //        view.layer.borderWidth = 1
-        view.layer.cornerRadius = 5
-        view.layer.backgroundColor = UIColor.darkGray.cgColor
+    func saveItem() {
+        
+        let indexPathForTitle = NSIndexPath(row: 0, section: C.DetailSection.title) as IndexPath
+        let indexPathForDesc = NSIndexPath(row: 0, section: C.DetailSection.desc) as IndexPath
+        let titleCell = tableView.cellForRow(at: indexPathForTitle) as? TitleTableViewCell
+        let descCell = tableView.cellForRow(at: indexPathForDesc) as? DescTableViewCell
+        let titleText = titleCell!.titleTextView.text ?? ""
+        let descText = descCell!.descTextView.text ?? ""
+        
+        if titleText != "", descText != "" {
+            if titleText != "Write here" {
+                if item == nil {
+                    TDItemManager.shared.insertItem(titleText: titleText, descText: descText, startDate: startDate, endDate: endDate)
+                } else {
+                    TDItemManager.shared.updateItem(item: item, titleText: titleText, descText: descText, startDate: startDate, endDate: endDate)
+                }
+            } else {
+                alertToUser("Alert", "Write the title please")
+            }
+        } else {
+            print("TitleText is Nil")
+        }
+    }
+}
+
+extension TDDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
     }
     
-    func saveItem() {
-        if item == nil {
-            TDItemManager.shared.insertItem(titleTextView: titleTextView, descTextView: descTextView, startDate: startDate, endDate: endDate)
-        } else {
-            TDItemManager.shared.updateItem(item: item, titleTextView: titleTextView, descTextView: descTextView, startDate: startDate, endDate: endDate)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+ 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        switch indexPath.section {
+            
+        case C.DetailSection.title:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.titleCell, for: indexPath) as? TitleTableViewCell else { return UITableViewCell() }
+            
+            if let item = item {
+                cell.mappingData(item)
+                if item.isComplete == true {
+                    cell.titleTextView.isUserInteractionEnabled = false
+                }
+            }
+            return cell
+        
+        case C.DetailSection.desc:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.descCell, for: indexPath) as? DescTableViewCell else { return UITableViewCell() }
+            
+            if let item = item {
+                cell.mappingData(item)
+                if item.isComplete == true {
+                    cell.descTextView.isUserInteractionEnabled = false
+                }
+            }
+            return cell
+            
+        case C.DetailSection.date:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.dateCell, for: indexPath) as? DateTableViewCell else { return UITableViewCell() }
+            
+            if let item = item {
+                cell.mappingData(item)
+                if item.isComplete == true {
+                    cell.startDatePicker.isUserInteractionEnabled = false
+                    cell.endDatePicker.isUserInteractionEnabled = false
+                }
+            }
+            return cell
+            
+        case C.DetailSection.result:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.resultCell, for: indexPath) as? ResultTableViewCell else { return UITableViewCell() }
+            
+            if let item = item {
+                cell.mappingData(item)
+            }
+            return cell
+            
+        default:
+            return UITableViewCell()
         }
     }
     
-    func loadItem() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if let data = item {
-            titleTextView.text = data.title
-            descTextView.text = data.descript
-            dateLabel.text = dateFormatter.string(from: data.date)
-            startDatePicker.setDate(data.startDate, animated: false)
-            endDatePicker.setDate(data.endDate, animated: false)
+        if indexPath.section == C.DetailSection.date {
+            return 200
+        } else if indexPath.section == C.DetailSection.result {
+            return 200
+        } else {
+            return UITableView.automaticDimension
         }
     }
 }
