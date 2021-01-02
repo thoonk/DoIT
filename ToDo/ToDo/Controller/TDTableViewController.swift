@@ -11,11 +11,12 @@ import RealmSwift
 class TDTableViewController: UIViewController {
     
     var items: Results<TDItem>?
+    let notiManager = TDNotiManager()
 
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func writeBtnPressed(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: C.detailFromTable, sender: nil)
+        performSegue(withIdentifier: C.SegueIdentifier.detailFromTable, sender: nil)
     }
     
     @IBAction func completeBtnPressed(_ sender: UIButton) {
@@ -38,13 +39,9 @@ class TDTableViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        items = TDItemManager.shared.getItems()
         
-//        let titleLabel = UILabel()
-//        titleLabel.textColor = UIColor.label
-//        titleLabel.text = "Do IT"
-//        titleLabel.font = UIFont.systemFont(ofSize: 25.0)
-//        navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: titleLabel)
+        items = TDItemManager.shared.getItems()
+
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor(named: "BackgroundColor")
         navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
@@ -54,6 +51,7 @@ class TDTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        notiManager.requestNotiAuth()
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
         self.tableView.dataSource = self
@@ -61,7 +59,7 @@ class TDTableViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == C.detailFromTable {
+        if segue.identifier == C.SegueIdentifier.detailFromTable {
             if let vc = segue.destination as? TDDetailViewController, let item = sender as? TDItem {
                 vc.item = item
             }
@@ -85,17 +83,17 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 60
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.tableCell, for: indexPath) as? TDTableViewCell else {
+        guard let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.tableCell, for: indexPath) as? TDTableViewCell else {
             return UITableViewCell()
         }
         if let data = self.items?[indexPath.row] {
             cell.mappingData(data)
-            cell.cellView.layer.cornerRadius = 7
+            cell.cellView.layer.cornerRadius = 10
             cell.cellView.layer.masksToBounds = true
             
             if data.isEmphasis == false {
@@ -124,7 +122,10 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         deleteAction.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.0)
-        deleteAction.image = UIImage(systemName: "delete.left")
+        
+        let deleteIcon = UIImage(systemName: "delete.left")?.withTintColor(UIColor(named: "ImageColor")!, renderingMode: .alwaysOriginal)
+        
+        deleteAction.image = deleteIcon
         
         let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
         return swipeActions
@@ -138,7 +139,7 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
             
             TDItemManager.shared.updateEmphasis(item: (self.items?[indexPath.row])!)
             
-            if let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.tableCell, for: indexPath) as? TDTableViewCell {
+            if let cell: TDTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.tableCell, for: indexPath) as? TDTableViewCell {
                 
                 if let item = self.items?[indexPath.row] {
                 
@@ -153,18 +154,22 @@ extension TDTableViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         emphasisAction.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.0)
-        emphasisAction.image = UIImage(systemName: "star.fill")
-
         
+        let emphasizeIcon = UIImage(systemName: "star.fill")?.withTintColor(UIColor(named: "ImageColor")!, renderingMode: .alwaysOriginal)
+        
+        emphasisAction.image = emphasizeIcon
+    
         let swipeActions = UISwipeActionsConfiguration(actions: [emphasisAction])
         return swipeActions
     }
     
     // 선택된 cell의 정보로 DetailVC로 화면 전환
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         let item = self.items?[indexPath.row]
 //        let index = indexPath
-        performSegue(withIdentifier: C.detailFromTable, sender: item)
+        performSegue(withIdentifier: C.SegueIdentifier.detailFromTable, sender: item)
     }
 }
 
