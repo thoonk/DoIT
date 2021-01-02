@@ -61,16 +61,13 @@ class TDItemManager: NSObject {
         return realm.objects(TDItem.self).sorted(byKeyPath: "id", ascending: true)
     }
     
-    func insertItem(titleTextView: UITextView, descTextView: UITextView, startDate: Date, endDate: Date){
+    func insertItem(titleText: String, descText: String, startDate: Date, endDate: Date){
         let realm = self.getRealm()
-        
         var item: TDItem
         
         do {
-            if let id = incrementID(),
-               let title = titleTextView.text,
-               let desc = descTextView.text {
-                item = TDItem(id: id, title: title, descript: desc, startDate: startDate, endDate: endDate)
+            if let id = incrementID() {
+                item = TDItem(id: id, title: titleText, descript: descText, startDate: startDate, endDate: endDate)
                 try realm.write{
                     realm.add(item)
                 }
@@ -80,14 +77,12 @@ class TDItemManager: NSObject {
         }
     }
     
-    func updateItem(item: TDItem?, titleTextView: UITextView, descTextView: UITextView, startDate: Date, endDate: Date) {
-        
+    func updateItem(item: TDItem?, titleText: String, descText: String, startDate: Date, endDate: Date) {
         let realm = self.getRealm()
+        
         do {
-            if let title = titleTextView.text,
-               let desc = descTextView.text,
-               var item = item {
-                item = TDItem(id: item.id, title: title, descript: desc, startDate: startDate, endDate: endDate)
+            if var item = item {
+                item = TDItem(id: item.id, title: titleText, descript: descText, startDate: startDate, endDate: endDate)
                 try realm.write {
                     realm.add(item, update: .modified)
                 }
