@@ -1,2 +1,3 @@
-# ToDo-Swift
-simple ToDo App.
+# DoIT
+
+ToDo app with added functions to enhance performance.
