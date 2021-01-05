@@ -93,6 +93,7 @@ class DIItemManager: NSObject {
     }
     
     func deleteItem(with item: DIItem) {
+        DINotiManager.shared.removeNoti(with: item.id)
         let realm = self.getRealm()
         do {
             try realm.write{
