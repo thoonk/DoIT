@@ -9,16 +9,18 @@ import UIKit
 import RealmSwift
 
 class DIListViewController: UIViewController {
-    
+    // MARK: - Properties
     var items: Results<DIItem>?
     let notiManager = DINotiManager()
 
+    // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - IBAction
     @IBAction func writeBtnPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: C.SegueIdentifier.detailFromTable, sender: nil)
     }
-    
+
     @IBAction func completeBtnPressed(_ sender: UIButton) {
         
         let contentView = sender.superview?.superview?.superview
@@ -38,6 +40,7 @@ class DIListViewController: UIViewController {
         self.tableView.reloadData()
     }
     
+    // MARK: - LifeCycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -58,7 +61,7 @@ class DIListViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }
-    
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == C.SegueIdentifier.detailFromTable {
             if let vc = segue.destination as? DIDetailViewController, let item = sender as? DIItem {
@@ -168,8 +171,9 @@ extension DIListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let item = self.items?[indexPath.row]
-        performSegue(withIdentifier: C.SegueIdentifier.detailFromTable, sender: item)
+        if let item = self.items?[indexPath.row] {
+            performSegue(withIdentifier: C.SegueIdentifier.detailFromTable, sender: item)
+        }
     }
 }
 
