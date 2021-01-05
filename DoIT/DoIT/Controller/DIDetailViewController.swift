@@ -10,8 +10,8 @@ import RealmSwift
 
 class DIDetailViewController: UIViewController {
     
+    // MARK: - Properties
     var item: DIItem?
-    
     let currentDate: Date = Date()
     var startDate: Date = Date()
     var endDate: Date = Date()
@@ -22,17 +22,18 @@ class DIDetailViewController: UIViewController {
             tableView.reloadRows(at: [indexPathForDate], with: .fade)
         }
     }
-        
+    
+    // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
-    
-    @objc func switchChanged(_ sender: UISwitch) {
+    // MARK: - IBAction
+    @IBAction func deleteBtnPressed(_ sender: UIButton) {
         
-        if sender.isOn {
-            switchFlag = true
-        } else {
-            switchFlag = false
+        if let item = self.item {
+            DIItemManager.shared.deleteItem(with: item)
+            navigationController?.popViewController(animated: true)
         }
     }
     
@@ -74,10 +75,21 @@ class DIDetailViewController: UIViewController {
     @IBAction func startDateChanged(_ sender: UIDatePicker) {
         startDate = sender.date
     }
+    
     @IBAction func endDateChanged(_ sender: UIDatePicker) {
         endDate = sender.date
     }
     
+    @objc func switchChanged(_ sender: UISwitch) {
+        
+        if sender.isOn {
+            switchFlag = true
+        } else {
+            switchFlag = false
+        }
+    }
+    
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -93,9 +105,13 @@ class DIDetailViewController: UIViewController {
         if let item = item {
             dateLabel.text = dateFormatter.string(from: item.date)
             switchFlag = item.isSwitchOn
+            deleteButton.isEnabled = true
+            deleteButton.title = "Delete"
         } else {
             dateLabel.text = dateFormatter.string(from: Date())
             switchFlag = false
+            deleteButton.isEnabled = false
+            deleteButton.title = ""
         }
     }
     
@@ -103,7 +119,7 @@ class DIDetailViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-
+    // MARK: - UserDefinedFunction
     /// 알림 메서드
     func alertToUser(_ title: String, _ message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
@@ -140,7 +156,7 @@ class DIDetailViewController: UIViewController {
         return newItem
     }
 }
-
+// MARK: - TableView
 extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
