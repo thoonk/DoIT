@@ -34,25 +34,25 @@ class DIResultTableViewCell: UITableViewCell {
         }
     }
     
-    // 할 일을 완료하면 날짜 계산해서 보여줌
+    /// 할 일을 완료하면 날짜 계산해서 보여줌
     func computeDate(_ data: DIItem?) -> DateComponents {
         if let data = data, data.isComplete == true, data.startDate != data.endDate {
             let calendar = Calendar.current
             
             if data.endDate > data.completeDate! {
                 let time = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: data.completeDate!, to: data.endDate)
-                resultLabel.text = "less than the endDate"
+                resultLabel.text = C.Result.resultTextLess
                 return time
             } else {
                 let time = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: data.endDate, to: data.completeDate!)
-                resultLabel.text = "more than the endDate"
+                resultLabel.text = C.Result.resultTextMore
                 return time
             }
         }
         return DateComponents.init()
     }
     
-    // 뷰의 쉐도우 효과 설정
+    /// 뷰의 쉐도우 효과 설정
     func viewsUI(_ views: [UIView]) {
         
         for view in views {
@@ -67,7 +67,7 @@ class DIResultTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         self.selectionStyle = .none
-        resultLabel.text = "If you want to see the results, complete it first please."
+        resultLabel.text = C.Result.resultTextInit
         viewsUI([yearView,monView,dayView,hourView,minView])
     }
 

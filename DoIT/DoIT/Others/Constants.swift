@@ -9,6 +9,13 @@ import Foundation
 
 struct C {
     
+    struct Result {
+        static let resultTextInit = "If you want to see the results, set performance and complete it first please."
+        
+        static let resultTextLess = "Less than the endDate"
+        static let resultTextMore = "More than the endDate"
+    }
+    
     struct TextPlaceHolder {
         static let text = "Write here"
     }
@@ -26,6 +33,10 @@ struct C {
         static let result = 3
     }
     
+    struct InfoSection {
+        static let about = 0
+    }
+    
     struct CellIdentifier {
         static let tableCell: String = "tableCell"
         static let titleCell: String = "titleCell"
@@ -36,5 +47,10 @@ struct C {
     
     struct SegueIdentifier {
         static let detailFromTable: String = "detailFromTable"
+    }
+    
+    struct Info {
+        static let infos: [String] = ["User Guide", "App Version", "Review", "Feedback"]
+        static let detail: [String] = ["", "1.0", "Please:)", "Please:)"]
     }
 }
