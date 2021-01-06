@@ -45,6 +45,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
    func userNotificationCenter(_ center: UNUserNotificationCenter,
                         willPresent noti: UNNotification,
                         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-    completionHandler([.list, .sound, .badge])
+    completionHandler([.list, .sound, .badge, .banner])
     }
 }
