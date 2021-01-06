@@ -28,12 +28,10 @@ class DINotiManager {
     // 알림 추가
     func addNoti(_ id: Int, _ title: String, _ body: String, _ date: Date) {
         notifications.append(DINoti(identifier: NSUUID().uuidString, title: title, body: body, date: date, itemId: id))
-        print("Notification!!!: \(notifications)")
     }
     // 알림 설정
     func scheduleNoti() {
         for noti in notifications {
-            
             let notiContent = UNMutableNotificationContent()
             notiContent.title = noti.title
             notiContent.body = noti.body
@@ -54,14 +52,10 @@ class DINotiManager {
     // 완료되면 알림 삭제
     func removeNoti(with target: Int) {
         var identifiers = [String]()
-        print("This is a target \(target)")
         for noti in notifications {
-            print("BeforeRemove: \(noti)")
             identifiers.append(noti.getNotiForItemId(itemId: target))
         }
         
-        print("This is a identifier \(identifiers)")
-
         UNUserNotificationCenter.current().getPendingNotificationRequests { (notiRequests) in
             var removeIdentifiers = [String]()
             for noti: UNNotificationRequest in notiRequests {
@@ -71,9 +65,7 @@ class DINotiManager {
                     }
                 }
             }
-            print("BeforeRemove!! \(notiRequests)")
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: removeIdentifiers)
-            print("AfterRemove!! \(notiRequests)")
         }
     }
 }
