@@ -41,33 +41,14 @@ class DIDetailViewController: UIViewController {
         var newItem: DIItem = DIItem()
                 
         if startDate > endDate {
-            let indexPathForDate = NSIndexPath(row: 0, section: C.DetailSection.date) as IndexPath
-            let dateCell = tableView.cellForRow(at: indexPathForDate) as? DIDateTableViewCell
-            dateCell?.endDatePicker.setDate(startDate, animated: false)
-            endDate = startDate
-            alertToUser("Alert", "End Date must be set later than the Start Date")
+            selectPerformanceOrNoti()
         } else if startDate < endDate {
             newItem = saveItem()
-            if let item = self.item {
-                DINotiManager.shared.addNoti(item.id, item.title, C.NotiBody.startBody, item.startDate.alertTime())
-                DINotiManager.shared.addNoti(item.id, item.title, C.NotiBody.endBody, item.endDate.alertTime())
-                DINotiManager.shared.scheduleNoti()
-            } else {
-                DINotiManager.shared.addNoti(newItem.id, newItem.title, C.NotiBody.startBody, newItem.startDate.alertTime())
-                DINotiManager.shared.addNoti(newItem.id, newItem.title, C.NotiBody.endBody, newItem.endDate.alertTime())
-                DINotiManager.shared.scheduleNoti()
-            }
+            setNotifyTwice(newItem)
             navigationController?.popViewController(animated: true)
-            
         } else {
             newItem = saveItem()
-            if let item = self.item {
-                DINotiManager.shared.addNoti(item.id, item.title, C.NotiBody.nowBody, item.startDate)
-                DINotiManager.shared.scheduleNoti()
-            } else {
-                DINotiManager.shared.addNoti(newItem.id, newItem.title, C.NotiBody.nowBody, newItem.startDate)
-                DINotiManager.shared.scheduleNoti()
-            }
+            setNotifyOnce(newItem)
             navigationController?.popViewController(animated: true)
         }
     }
@@ -131,6 +112,56 @@ class DIDetailViewController: UIViewController {
         present(alert, animated: false, completion: nil)
     }
     
+    /// startTime만 설정시 처리 메서드
+    func selectPerformanceOrNoti() {
+        let alert = UIAlertController(title: "Alert", message: "End Date must be set later than the Start Date", preferredStyle: UIAlertController.Style.actionSheet)
+        
+        let indexPathForDate = NSIndexPath(row: 0, section: C.DetailSection.date) as IndexPath
+        let dateCell = tableView.cellForRow(at: indexPathForDate) as? DIDateTableViewCell
+        
+        let onlyNotiAction = UIAlertAction(title: "Only Notify at start time", style: .default) { (action) in
+            dateCell?.endDatePicker.setDate(self.startDate, animated: false)
+            self.endDate = self.startDate
+            let newItem = self.saveItem()
+            self.setNotifyOnce(newItem)
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        let setPerformAction = UIAlertAction(title: "Notify both time", style: .default) { (action) in
+            dateCell?.endDatePicker.setDate(self.startDate, animated: false)
+            self.endDate = self.startDate
+        }
+        
+        alert.addAction(onlyNotiAction)
+        alert.addAction(setPerformAction)
+        present(alert, animated: false, completion: nil)
+    }
+    
+    /// 시작시간 알림 처리 메서드
+    func setNotifyOnce(_ newItem: DIItem) {
+        if let item = self.item {
+            DINotiManager.shared.addNoti(item.id, item.title, C.NotiBody.nowBody, item.startDate)
+            DINotiManager.shared.scheduleNoti()
+        } else {
+            DINotiManager.shared.addNoti(newItem.id, newItem.title, C.NotiBody.nowBody, newItem.startDate)
+            DINotiManager.shared.scheduleNoti()
+        }
+    }
+    
+    /// 시작과 끝 시간 알림 처리 메서드
+    func setNotifyTwice(_ newItem: DIItem) {
+        if let item = self.item {
+            DINotiManager.shared.addNoti(item.id, item.title, C.NotiBody.startBody, item.startDate.alertTime())
+            DINotiManager.shared.addNoti(item.id, item.title, C.NotiBody.endBody, item.endDate.alertTime())
+            DINotiManager.shared.scheduleNoti()
+        } else {
+            DINotiManager.shared.addNoti(newItem.id, newItem.title, C.NotiBody.startBody, newItem.startDate.alertTime())
+            DINotiManager.shared.addNoti(newItem.id, newItem.title, C.NotiBody.endBody, newItem.endDate.alertTime())
+            DINotiManager.shared.scheduleNoti()
+        }
+    }
+    
+    /// Item 저장 메서드
     func saveItem() -> DIItem {
         var newItem: DIItem = DIItem()
         let indexPathForTitle = NSIndexPath(row: 0, section: C.DetailSection.title) as IndexPath
