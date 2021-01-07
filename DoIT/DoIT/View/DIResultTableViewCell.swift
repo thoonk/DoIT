@@ -36,17 +36,21 @@ class DIResultTableViewCell: UITableViewCell {
     
     /// 할 일을 완료하면 날짜 계산해서 보여줌
     func computeDate(_ data: DIItem?) -> DateComponents {
-        if let data = data, data.isComplete == true, data.startDate != data.endDate {
-            let calendar = Calendar.current
-            
-            if data.endDate > data.completeDate! {
-                let time = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: data.completeDate!, to: data.endDate)
-                resultLabel.text = C.Result.resultTextLess
-                return time
+        if let data = data, data.isComplete == true {
+            if data.startDate != data.endDate {
+                let calendar = Calendar.current
+                
+                if data.endDate > data.completeDate! {
+                    let time = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: data.completeDate!, to: data.endDate)
+                    resultLabel.text = C.Result.resultTextLess
+                    return time
+                } else {
+                    let time = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: data.endDate, to: data.completeDate!)
+                    resultLabel.text = C.Result.resultTextMore
+                    return time
+                }
             } else {
-                let time = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: data.endDate, to: data.completeDate!)
-                resultLabel.text = C.Result.resultTextMore
-                return time
+                resultLabel.text = C.Result.resultTextNil
             }
         }
         return DateComponents.init()
