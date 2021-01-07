@@ -7,16 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0808CA1225A57DE200CDBFF7 /* DIInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0808CA1125A57DE200CDBFF7 /* DIInfoTableViewCell.swift */; };
+		0808CA1825A588A400CDBFF7 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0808CA1725A588A400CDBFF7 /* UITableViewCell.swift */; };
 		0809ED7325949E1600A00434 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809ED7225949E1600A00434 /* Constants.swift */; };
 		0812716125A1B40E00416A0A /* DINoti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812716025A1B40E00416A0A /* DINoti.swift */; };
 		084B7830259B19A600443BA5 /* DINotiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B782F259B19A600443BA5 /* DINotiManager.swift */; };
+		0856F50C25A6CC2C00B0F5ED /* DIOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0856F50B25A6CC2C00B0F5ED /* DIOnboardViewController.swift */; };
+		0856F51025A7114D00B0F5ED /* DIOnboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0856F50F25A7114D00B0F5ED /* DIOnboardTableViewCell.swift */; };
 		08704BDB25A052AA003358C1 /* DIDescTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08704BDA25A052AA003358C1 /* DIDescTableViewCell.swift */; };
-		0883CE682598C077004550D1 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883CE672598C077004550D1 /* String.swift */; };
 		088F0C71259C718700FFE820 /* DIItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F0C70259C718700FFE820 /* DIItemManager.swift */; };
 		089034EE259898C4002CA0DB /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089034ED259898C4002CA0DB /* Date.swift */; };
 		0899239A259DE8E000D1A8A1 /* DITitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08992399259DE8E000D1A8A1 /* DITitleTableViewCell.swift */; };
 		0899239E259DE8EA00D1A8A1 /* DIDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899239D259DE8EA00D1A8A1 /* DIDateTableViewCell.swift */; };
 		089923A2259DE8F000D1A8A1 /* DIResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089923A1259DE8F000D1A8A1 /* DIResultTableViewCell.swift */; };
+		089DCDAE25A4412A00BE7219 /* DIInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089DCDAD25A4412A00BE7219 /* DIInfoViewController.swift */; };
 		08FDF556255A8E4F00640DDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF555255A8E4F00640DDF /* AppDelegate.swift */; };
 		08FDF558255A8E4F00640DDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF557255A8E4F00640DDF /* SceneDelegate.swift */; };
 		08FDF55A255A8E4F00640DDF /* DIListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF559255A8E4F00640DDF /* DIListViewController.swift */; };
@@ -42,16 +46,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0808CA1125A57DE200CDBFF7 /* DIInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIInfoTableViewCell.swift; sourceTree = "<group>"; };
+		0808CA1725A588A400CDBFF7 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		0809ED7225949E1600A00434 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0812716025A1B40E00416A0A /* DINoti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DINoti.swift; sourceTree = "<group>"; };
 		084B782F259B19A600443BA5 /* DINotiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DINotiManager.swift; sourceTree = "<group>"; };
+		0856F50B25A6CC2C00B0F5ED /* DIOnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIOnboardViewController.swift; sourceTree = "<group>"; };
+		0856F50F25A7114D00B0F5ED /* DIOnboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIOnboardTableViewCell.swift; sourceTree = "<group>"; };
 		08704BDA25A052AA003358C1 /* DIDescTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIDescTableViewCell.swift; sourceTree = "<group>"; };
-		0883CE672598C077004550D1 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		088F0C70259C718700FFE820 /* DIItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIItemManager.swift; sourceTree = "<group>"; };
 		089034ED259898C4002CA0DB /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		08992399259DE8E000D1A8A1 /* DITitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DITitleTableViewCell.swift; sourceTree = "<group>"; };
 		0899239D259DE8EA00D1A8A1 /* DIDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIDateTableViewCell.swift; sourceTree = "<group>"; };
 		089923A1259DE8F000D1A8A1 /* DIResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIResultTableViewCell.swift; sourceTree = "<group>"; };
+		089DCDAD25A4412A00BE7219 /* DIInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIInfoViewController.swift; sourceTree = "<group>"; };
 		08FDF552255A8E4F00640DDF /* DoIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoIT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08FDF555255A8E4F00640DDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08FDF557255A8E4F00640DDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,7 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				089034ED259898C4002CA0DB /* Date.swift */,
-				0883CE672598C077004550D1 /* String.swift */,
+				0808CA1725A588A400CDBFF7 /* UITableViewCell.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -151,10 +159,10 @@
 		08FDF554255A8E4F00640DDF /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
-				085BF6E225A3369700BA6C97 /* Storyboards */,
 				088F0C74259CB5A400FFE820 /* Others */,
 				089034EC259898B6002CA0DB /* Extension */,
 				08FDF59A255AA30C00640DDF /* Controller */,
+				085BF6E225A3369700BA6C97 /* Storyboards */,
 				08FDF599255AA30300640DDF /* View */,
 				08FDF598255AA2FC00640DDF /* Model */,
 			);
@@ -190,6 +198,8 @@
 				08704BDA25A052AA003358C1 /* DIDescTableViewCell.swift */,
 				0899239D259DE8EA00D1A8A1 /* DIDateTableViewCell.swift */,
 				089923A1259DE8F000D1A8A1 /* DIResultTableViewCell.swift */,
+				0808CA1125A57DE200CDBFF7 /* DIInfoTableViewCell.swift */,
+				0856F50F25A7114D00B0F5ED /* DIOnboardTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -199,6 +209,8 @@
 			children = (
 				08FDF559255A8E4F00640DDF /* DIListViewController.swift */,
 				08FDF5A0255AA4CD00640DDF /* DIDetailViewController.swift */,
+				089DCDAD25A4412A00BE7219 /* DIInfoViewController.swift */,
+				0856F50B25A6CC2C00B0F5ED /* DIOnboardViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -398,17 +410,21 @@
 				084B7830259B19A600443BA5 /* DINotiManager.swift in Sources */,
 				08704BDB25A052AA003358C1 /* DIDescTableViewCell.swift in Sources */,
 				089923A2259DE8F000D1A8A1 /* DIResultTableViewCell.swift in Sources */,
+				0856F50C25A6CC2C00B0F5ED /* DIOnboardViewController.swift in Sources */,
 				08FDF556255A8E4F00640DDF /* AppDelegate.swift in Sources */,
 				0812716125A1B40E00416A0A /* DINoti.swift in Sources */,
 				088F0C71259C718700FFE820 /* DIItemManager.swift in Sources */,
+				0856F51025A7114D00B0F5ED /* DIOnboardTableViewCell.swift in Sources */,
 				08FDF59D255AA3DC00640DDF /* DIItem.swift in Sources */,
-				0883CE682598C077004550D1 /* String.swift in Sources */,
 				089034EE259898C4002CA0DB /* Date.swift in Sources */,
+				0808CA1825A588A400CDBFF7 /* UITableViewCell.swift in Sources */,
 				08FDF5A1255AA4CD00640DDF /* DIDetailViewController.swift in Sources */,
 				0809ED7325949E1600A00434 /* Constants.swift in Sources */,
 				0899239E259DE8EA00D1A8A1 /* DIDateTableViewCell.swift in Sources */,
+				089DCDAE25A4412A00BE7219 /* DIInfoViewController.swift in Sources */,
 				0899239A259DE8E000D1A8A1 /* DITitleTableViewCell.swift in Sources */,
 				08FDF558255A8E4F00640DDF /* SceneDelegate.swift in Sources */,
+				0808CA1225A57DE200CDBFF7 /* DIInfoTableViewCell.swift in Sources */,
 				08FDF56C255A959B00640DDF /* DIListViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -614,7 +630,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U59PP2KXJ5;
-				INFOPLIST_FILE = TodoTests/Info.plist;
+				INFOPLIST_FILE = DoITTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -635,7 +651,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U59PP2KXJ5;
-				INFOPLIST_FILE = TodoTests/Info.plist;
+				INFOPLIST_FILE = DoITTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
