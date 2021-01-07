@@ -6,14 +6,16 @@
 //
 
 import Foundation
+import UIKit
 
 struct C {
     
     struct Result {
-        static let resultTextInit = "If you want to see the results, set performance and complete it first please."
+        static let resultTextInit = "Set performance and tap complete button. And then check the result!!"
         
         static let resultTextLess = "Less than the endDate"
         static let resultTextMore = "More than the endDate"
+        static let resultTextNil = "No results, this is because the start time and end time are the same."
     }
     
     struct TextPlaceHolder {
@@ -43,14 +45,32 @@ struct C {
         static let descCell: String = "descCell"
         static let dateCell: String = "dateCell"
         static let resultCell: String = "resultCell"
+        static let onboardCell: String = "onboardCell"
     }
     
     struct SegueIdentifier {
+        static let toMain: String = "toMain"
         static let detailFromTable: String = "detailFromTable"
+        static let onboardFromInfo: String = "onboardFromInfo"
     }
     
     struct Info {
         static let infos: [String] = ["User Guide", "App Version", "Review", "Feedback"]
         static let detail: [String] = ["", "1.0", "Please:)", "Please:)"]
+    }
+    
+    struct Onboard {
+        static let titles: [String] = ["Mark", "Delete", "Complete", "Performance", "Result", "DarkMode"]
+        static let bodies: [String] = [
+            "Swipe an item from left to right and mark the item!!",
+            "Swipe an item from right to left and delete the item!!",
+            "Tap the round button, and complete it!! And notifications are auto deleted.\nTap again to cancel the complete.",
+            "Set the start time and end time, notifications will arrive at each set time!!\nSet only the start time, and click the save button. And choose the options!!",
+            "Set the start and end times and tap the complete button. And check the result!!",
+            "Change the appearance of your device to see DoIT's light/dark mode"
+        ]
+    }
+    struct StoryboardID {
+        static let onboardVC = "onboardVC"
     }
 }
