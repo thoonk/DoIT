@@ -11,7 +11,7 @@ import UIKit
 class DINotiManager {
     
     static let shared = DINotiManager()
-    var notifications = [DINoti]()
+    private var notifications = [DINoti]()
 
     // 알림 권한 요청
     func requestNotiAuth() {
