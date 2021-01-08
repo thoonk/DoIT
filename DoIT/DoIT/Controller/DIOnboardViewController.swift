@@ -36,11 +36,10 @@ class DIOnboardViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 200
-        tableView.layer.cornerRadius = 10
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
 
-        startedButton.setTitle(" Get Started ", for: .normal)
+        startedButton.setTitle("  Get Started  ", for: .normal)
         startedButton.titleLabel?.adjustsFontSizeToFitWidth = true
         startedButton.layer.cornerRadius = 6
     }
@@ -60,16 +59,5 @@ extension DIOnboardViewController: UITableViewDataSource, UITableViewDelegate {
         cell.exImageView.image = images[indexPath.row]!
 
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if indexPath.row == 0 {
-            return 200
-        } else if indexPath.row == 1 {
-            return 200
-        } else {
-            return  UITableView.automaticDimension
-        }
     }
 }
