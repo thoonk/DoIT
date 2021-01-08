@@ -15,6 +15,7 @@ class DIDetailViewController: UIViewController {
     let currentDate: Date = Date()
     var startDate: Date = Date()
     var endDate: Date = Date()
+    let time = UserDefaults.standard.value(forKey: "reminderTime") as? Int ?? 10
     
     var switchFlag = false {
         didSet {
@@ -59,6 +60,14 @@ class DIDetailViewController: UIViewController {
     
     @IBAction func endDateChanged(_ sender: UIDatePicker) {
         endDate = sender.date
+    }
+  
+    @IBAction func todayBtnTapped(_ sender: UIButton) {
+        let indexPathForDate = NSIndexPath(row: 0, section: C.DetailSection.date) as IndexPath
+        let dateCell = tableView.cellForRow(at: indexPathForDate) as? DIDateTableViewCell
+        
+        dateCell?.startDatePicker.setDate(Date(), animated: true)
+        dateCell?.endDatePicker.setDate(Date(), animated: true)
     }
     
     @objc func switchChanged(_ sender: UISwitch) {
@@ -105,11 +114,9 @@ class DIDetailViewController: UIViewController {
     func alertToUser(_ title: String, _ message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            
-        }
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in }
         alert.addAction(okAction)
-        present(alert, animated: false, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     /// startTime만 설정시 처리 메서드
@@ -134,16 +141,16 @@ class DIDetailViewController: UIViewController {
         
         alert.addAction(onlyNotiAction)
         alert.addAction(setPerformAction)
-        present(alert, animated: false, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     /// 시작시간 알림 처리 메서드
     func setNotifyOnce(_ newItem: DIItem) {
         if let item = self.item {
-            DINotiManager.shared.addNoti(item.id, item.title, C.NotiBody.nowBody, item.startDate)
+            DINotiManager.shared.addNoti(item.id, item.title, "Start Time left \(time) min !!", item.startDate.alertTime())
             DINotiManager.shared.scheduleNoti()
         } else {
-            DINotiManager.shared.addNoti(newItem.id, newItem.title, C.NotiBody.nowBody, newItem.startDate)
+            DINotiManager.shared.addNoti(newItem.id, newItem.title, "Start Time left \(time) min !!", newItem.startDate.alertTime())
             DINotiManager.shared.scheduleNoti()
         }
     }
@@ -151,12 +158,12 @@ class DIDetailViewController: UIViewController {
     /// 시작과 끝 시간 알림 처리 메서드
     func setNotifyTwice(_ newItem: DIItem) {
         if let item = self.item {
-            DINotiManager.shared.addNoti(item.id, item.title, C.NotiBody.startBody, item.startDate.alertTime())
-            DINotiManager.shared.addNoti(item.id, item.title, C.NotiBody.endBody, item.endDate.alertTime())
+            DINotiManager.shared.addNoti(item.id, item.title, "Start Time left \(time) min !!", item.startDate.alertTime())
+            DINotiManager.shared.addNoti(item.id, item.title, "End Time left \(time) min !!", item.endDate.alertTime())
             DINotiManager.shared.scheduleNoti()
         } else {
-            DINotiManager.shared.addNoti(newItem.id, newItem.title, C.NotiBody.startBody, newItem.startDate.alertTime())
-            DINotiManager.shared.addNoti(newItem.id, newItem.title, C.NotiBody.endBody, newItem.endDate.alertTime())
+            DINotiManager.shared.addNoti(newItem.id, newItem.title, "Start Time left \(time) min !!", newItem.startDate.alertTime())
+            DINotiManager.shared.addNoti(newItem.id, newItem.title, "End Time left \(time) min !!", newItem.endDate.alertTime())
             DINotiManager.shared.scheduleNoti()
         }
     }
@@ -234,6 +241,8 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.endDatePicker.isUserInteractionEnabled = false
                 }
             }
+            cell.todayButton.setImage(UIImage(systemName: "calendar"), for: .normal)
+            
             return cell
             
         case C.DetailSection.result:
