@@ -11,6 +11,7 @@ class DIDateTableViewCell: UITableViewCell {
     
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
+    @IBOutlet weak var todayButton: UIButton!
     
     func mappingData(_ data: DIItem) {
         startDatePicker.setDate(data.startDate, animated: false)

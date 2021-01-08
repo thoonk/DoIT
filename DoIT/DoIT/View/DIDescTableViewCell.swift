@@ -43,8 +43,6 @@ class DIDescTableViewCell: UITableViewCell {
             descTextView.resignFirstResponder()
         }
     }
-
-    
 }
 
 extension DIDescTableViewCell: UITextViewDelegate {

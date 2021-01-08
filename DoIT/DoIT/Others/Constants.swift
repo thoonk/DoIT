@@ -12,7 +12,6 @@ struct C {
     
     struct Result {
         static let resultTextInit = "Set performance and tap complete button. And then check the result!!"
-        
         static let resultTextLess = "Less than the endDate"
         static let resultTextMore = "More than the endDate"
         static let resultTextNil = "No results, this is because the start time and end time are the same."
@@ -20,12 +19,6 @@ struct C {
     
     struct TextPlaceHolder {
         static let text = "Write here"
-    }
-    
-    struct NotiBody {
-        static let startBody: String = "Start Time left 10min !!"
-        static let endBody: String = "End Time left 10min !!"
-        static let nowBody: String = "Do IT Now !!"
     }
     
     struct DetailSection {
@@ -36,9 +29,10 @@ struct C {
     }
     
     struct InfoSection {
-        static let about = 0
+        static let setting = 0
+        static let about = 1
     }
-    
+
     struct CellIdentifier {
         static let tableCell: String = "tableCell"
         static let titleCell: String = "titleCell"
@@ -46,6 +40,8 @@ struct C {
         static let dateCell: String = "dateCell"
         static let resultCell: String = "resultCell"
         static let onboardCell: String = "onboardCell"
+        static let settingCell: String = "settingCell"
+        static let infoCell: String = "infoCell"
     }
     
     struct SegueIdentifier {
@@ -59,6 +55,20 @@ struct C {
         static let detail: [String] = ["", "1.0", "Please:)", "Please:)"]
     }
     
+    struct Reminder {
+        static let hour: Int = 60
+        static let halfHour: Int = 30
+        static let tenMin : Int = 10
+        static let setTime: Int = 0
+
+        static let options: Dictionary<Int,String> = [
+            60:"1 hour ago",
+            30:"30 min ago",
+            10:"10 min ago",
+            0: "Set time"
+        ]
+    }
+    
     struct Onboard {
         static let titles: [String] = ["Mark", "Delete", "Complete", "Performance", "Result", "DarkMode"]
         static let bodies: [String] = [
@@ -70,6 +80,7 @@ struct C {
             "Change the appearance of your device to see DoIT's light/dark mode"
         ]
     }
+    
     struct StoryboardID {
         static let onboardVC = "onboardVC"
     }
