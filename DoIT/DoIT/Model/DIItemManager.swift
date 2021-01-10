@@ -39,16 +39,16 @@ class DIItemManager: NSObject {
         }
     }
     
-    func updateEmphasis(with item: DIItem) {
+    func updateMark(with item: DIItem) {
         let realm = self.getRealm()
         do {
-            if item.isEmphasis == false {
+            if item.isMark == false {
                 try realm.write{
-                    item.isEmphasis = true
+                    item.isMark = true
                 }
             } else {
                 try realm.write{
-                    item.isEmphasis = false
+                    item.isMark = false
                 }
             }
         } catch {

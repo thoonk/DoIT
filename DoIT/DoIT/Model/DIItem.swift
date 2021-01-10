@@ -18,7 +18,7 @@ class DIItem: Object {
     @objc dynamic var endDate: Date = Date()
     @objc dynamic var completeDate: Date?
     @objc dynamic var isComplete: Bool = false
-    @objc dynamic var isEmphasis: Bool = false
+    @objc dynamic var isMark: Bool = false
     @objc dynamic var isSwitchOn: Bool = false
     
     convenience init (id: Int, title: String, descript: String, startDate: Date, endDate: Date, isSwitchOn: Bool) {

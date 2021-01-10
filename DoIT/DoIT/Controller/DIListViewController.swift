@@ -44,8 +44,6 @@ class DIListViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        items = DIItemManager.shared.getItems()
-
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor(named: "BackgroundColor")
         navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
@@ -56,7 +54,7 @@ class DIListViewController: UIViewController {
         super.viewDidLoad()
         
         notiManager.requestNotiAuth()
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        items = DIItemManager.shared.getItems()
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -100,7 +98,7 @@ extension DIListViewController: UITableViewDelegate, UITableViewDataSource {
             cell.cellView.layer.cornerRadius = 10
             cell.cellView.layer.masksToBounds = true
             
-            if data.isEmphasis == false {
+            if data.isMark == false {
                 cell.markImageView.isHidden = true
             } else {
                 cell.markImageView.isHidden = false
@@ -139,15 +137,14 @@ extension DIListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         // 강조 / 강조 취소
-        let emphasisAction = UIContextualAction(style: .normal, title: "") { (contextualAction, view, isSuccess) in
+        let markAction = UIContextualAction(style: .normal, title: "") { (contextualAction, view, isSuccess) in
             
-            DIItemManager.shared.updateEmphasis(with: (self.items?[indexPath.row])!)
-            
+            DIItemManager.shared.updateMark(with: (self.items?[indexPath.row])!)
             if let cell: DIListViewCell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.tableCell, for: indexPath) as? DIListViewCell {
                 
                 if let item = self.items?[indexPath.row] {
                 
-                    if item.isEmphasis == false {
+                    if item.isMark == false {
                         cell.markImageView.isHidden = true
                     } else {
                         cell.markImageView.isHidden = false
@@ -157,13 +154,13 @@ extension DIListViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.reloadData()
         }
         
-        emphasisAction.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.0)
+        markAction.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.0)
+
+        let markIcon = UIImage(systemName: "star.fill")?.withTintColor(UIColor(named: "ImageColor")!, renderingMode: .alwaysOriginal)
         
-        let emphasizeIcon = UIImage(systemName: "star.fill")?.withTintColor(UIColor(named: "ImageColor")!, renderingMode: .alwaysOriginal)
-        
-        emphasisAction.image = emphasizeIcon
+        markAction.image = markIcon
     
-        let swipeActions = UISwipeActionsConfiguration(actions: [emphasisAction])
+        let swipeActions = UISwipeActionsConfiguration(actions: [markAction])
         return swipeActions
     }
     
@@ -176,4 +173,3 @@ extension DIListViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
