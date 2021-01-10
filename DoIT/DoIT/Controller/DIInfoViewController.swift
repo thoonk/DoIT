@@ -8,17 +8,21 @@
 import UIKit
 
 class DIInfoViewController: UIViewController {
-        
+    // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
+        // 비어 있는 row의 라인 제거
+        tableView.tableFooterView = UIView(frame: .zero)
     }
     
+    // MARK: - UserDefinedFunction
+    /// 알림 시간 선택할 수 있는 함수
     func setReminderTime() {
         
         let titleFont = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
@@ -26,9 +30,9 @@ class DIInfoViewController: UIViewController {
         let messageFont = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
         let messageAttrString = NSMutableAttributedString(string: "Choose the time you want to be notified", attributes: messageFont)
         
-        let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-        alert.setValue(titleAttrString, forKey: "attributedTitle")
-        alert.setValue(messageAttrString, forKey: "attributedMessage")
+        let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        actionSheet.setValue(titleAttrString, forKey: "attributedTitle")
+        actionSheet.setValue(messageAttrString, forKey: "attributedMessage")
         
         let hourAction = UIAlertAction(title: C.Reminder.options[60], style: .default) { (action) in
             UserDefaults.standard.set(C.Reminder.hour, forKey: "reminderTime")
@@ -49,16 +53,15 @@ class DIInfoViewController: UIViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
         }
         
-       
-        alert.addAction(setTimeAction)
-        alert.addAction(tenMinAction)
-        alert.addAction(halfHourAction)
-        alert.addAction(hourAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
+        actionSheet.addAction(setTimeAction)
+        actionSheet.addAction(tenMinAction)
+        actionSheet.addAction(halfHourAction)
+        actionSheet.addAction(hourAction)
+        actionSheet.addAction(cancelAction)
+        present(actionSheet, animated: true, completion: nil)
     }
 }
-
+// MARK: - TableView
 extension DIInfoViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -115,7 +118,7 @@ extension DIInfoViewController: UITableViewDataSource, UITableViewDelegate {
             return ""
         }
     }
-    
+    /// 섹션헤더 배경색 바꾸는 함수
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor(named: "ViewColor")
     }
