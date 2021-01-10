@@ -10,7 +10,6 @@ import Foundation
 extension Date {
     
     func alertTime () -> Date {
-        
         if let reminderValue: Int = UserDefaults.standard.value(forKey: "reminderTime") as? Int {
             return Calendar.current.date(byAdding: .minute, value: -reminderValue, to: self)!
         } else {

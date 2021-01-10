@@ -21,6 +21,7 @@
 		0899239E259DE8EA00D1A8A1 /* DIDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899239D259DE8EA00D1A8A1 /* DIDateTableViewCell.swift */; };
 		089923A2259DE8F000D1A8A1 /* DIResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089923A1259DE8F000D1A8A1 /* DIResultTableViewCell.swift */; };
 		089DCDAE25A4412A00BE7219 /* DIInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089DCDAD25A4412A00BE7219 /* DIInfoViewController.swift */; };
+		08AE97F225A845F300679F97 /* DISettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AE97F125A845F300679F97 /* DISettingTableViewCell.swift */; };
 		08FDF556255A8E4F00640DDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF555255A8E4F00640DDF /* AppDelegate.swift */; };
 		08FDF558255A8E4F00640DDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF557255A8E4F00640DDF /* SceneDelegate.swift */; };
 		08FDF55A255A8E4F00640DDF /* DIListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF559255A8E4F00640DDF /* DIListViewController.swift */; };
@@ -60,6 +61,7 @@
 		0899239D259DE8EA00D1A8A1 /* DIDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIDateTableViewCell.swift; sourceTree = "<group>"; };
 		089923A1259DE8F000D1A8A1 /* DIResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIResultTableViewCell.swift; sourceTree = "<group>"; };
 		089DCDAD25A4412A00BE7219 /* DIInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIInfoViewController.swift; sourceTree = "<group>"; };
+		08AE97F125A845F300679F97 /* DISettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DISettingTableViewCell.swift; sourceTree = "<group>"; };
 		08FDF552255A8E4F00640DDF /* DoIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoIT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08FDF555255A8E4F00640DDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08FDF557255A8E4F00640DDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				089923A1259DE8F000D1A8A1 /* DIResultTableViewCell.swift */,
 				0808CA1125A57DE200CDBFF7 /* DIInfoTableViewCell.swift */,
 				0856F50F25A7114D00B0F5ED /* DIOnboardTableViewCell.swift */,
+				08AE97F125A845F300679F97 /* DISettingTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				08FDF5A1255AA4CD00640DDF /* DIDetailViewController.swift in Sources */,
 				0809ED7325949E1600A00434 /* Constants.swift in Sources */,
 				0899239E259DE8EA00D1A8A1 /* DIDateTableViewCell.swift in Sources */,
+				08AE97F225A845F300679F97 /* DISettingTableViewCell.swift in Sources */,
 				089DCDAE25A4412A00BE7219 /* DIInfoViewController.swift in Sources */,
 				0899239A259DE8E000D1A8A1 /* DITitleTableViewCell.swift in Sources */,
 				08FDF558255A8E4F00640DDF /* SceneDelegate.swift in Sources */,
