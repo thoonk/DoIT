@@ -178,22 +178,19 @@ class DIDetailViewController: UIViewController {
         let titleText = titleCell!.titleTextView.text ?? ""
         let descText = descCell!.descTextView.text ?? ""
         
-        if titleText != "", descText != "" {
-            if titleText != "Write here" {
-                if self.item == nil {
-                    newItem = DIItemManager.shared.insertItem(titleText, descText, startDate, endDate, switchFlag)
-                } else {
-                    newItem = DIItemManager.shared.updateItem(item, titleText, descText, startDate, endDate, switchFlag)
-                }
+        if !titleText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty, titleText != "Write here" {
+            if self.item == nil {
+                newItem = DIItemManager.shared.insertItem(titleText, descText, startDate, endDate, switchFlag)
             } else {
-                alertToUser("Alert", "Write the title please")
+                newItem = DIItemManager.shared.updateItem(item, titleText, descText, startDate, endDate, switchFlag)
             }
         } else {
-            print("TitleText is Nil")
+            alertToUser("Alert", "Write the title please")
         }
         return newItem
     }
 }
+
 // MARK: - TableView
 extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
