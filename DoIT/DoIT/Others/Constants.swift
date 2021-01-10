@@ -79,6 +79,15 @@ struct C {
             "Set the start and end times and tap the complete button. And check the result!!",
             "Change the appearance of your device to see DoIT's light/dark mode"
         ]
+        
+        static let images: [UIImage?] = [
+            UIImage(named: "mark"),
+            UIImage(named: "delete"),
+            UIImage(named: "complete"),
+            UIImage(named: "selectOption"),
+            UIImage(named: "resultLess"),
+            UIImage(named: "darkmode")
+        ]
     }
     
     struct StoryboardID {

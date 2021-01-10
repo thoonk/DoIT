@@ -8,17 +8,7 @@
 import UIKit
 
 class DIOnboardViewController: UIViewController {
-    
-    let images: [UIImage?] = [
-        UIImage(named: "mark"),
-        UIImage(named: "delete"),
-        UIImage(named: "complete"),
-        UIImage(named: "selectOption"),
-        UIImage(named: "resultLess"),
-        UIImage(named: "darkmode")
-    ]
-
-    
+    // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var startedButton: UIButton!
     
@@ -28,23 +18,20 @@ class DIOnboardViewController: UIViewController {
         performSegue(withIdentifier: "toMain", sender: self)
         
     }
-    
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = UITableView.automaticDimension
-        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
 
         startedButton.setTitle("  Get Started  ", for: .normal)
         startedButton.titleLabel?.adjustsFontSizeToFitWidth = true
         startedButton.layer.cornerRadius = 6
     }
 }
-
+// MARK: - TableView
 extension DIOnboardViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,7 +43,7 @@ extension DIOnboardViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.titleLabel.text = C.Onboard.titles[indexPath.row]
         cell.bodyLabel.text = C.Onboard.bodies[indexPath.row]
-        cell.exImageView.image = images[indexPath.row]!
+        cell.exImageView.image = C.Onboard.images[indexPath.row]!
 
         return cell
     }
