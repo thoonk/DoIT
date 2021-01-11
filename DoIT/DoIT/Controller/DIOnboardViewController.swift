@@ -14,8 +14,8 @@ class DIOnboardViewController: UIViewController {
     
     @IBAction func startedBtnTapped(_ sender: UIButton) {
         
-        UserDefaults.standard.set(true, forKey: "check")
-        performSegue(withIdentifier: "toMain", sender: self)
+        UserDefaults.standard.set(true, forKey: C.UserDefaultsKey.check)
+        performSegue(withIdentifier: C.SegueIdentifier.mainFromOnboard, sender: self)
         
     }
     // MARK: - LifeCycle
@@ -26,7 +26,7 @@ class DIOnboardViewController: UIViewController {
         tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
 
-        startedButton.setTitle("  Get Started  ", for: .normal)
+        startedButton.setTitle("  바로 시작하기  ", for: .normal)
         startedButton.titleLabel?.adjustsFontSizeToFitWidth = true
         startedButton.layer.cornerRadius = 6
     }

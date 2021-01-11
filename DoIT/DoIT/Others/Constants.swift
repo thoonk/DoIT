@@ -11,14 +11,14 @@ import UIKit
 struct C {
     
     struct Result {
-        static let resultTextInit = "Set performance and tap complete button. And then check the result!!"
-        static let resultTextLess = "Less than the endDate"
-        static let resultTextMore = "More than the endDate"
-        static let resultTextNil = "No results, this is because the start time and end time are the same."
+        static let resultTextInit = "퍼포먼스를 설정하고 항목을 완료하면 결과를 확인할 수 있습니다!!"
+        static let resultTextLess = "만큼 종료 날짜보다 더 빨리 일을 끝냈습니다. 축하드립니다!!"
+        static let resultTextMore = "만큼 종료 날짜보다 더 늦게 일을 끝냈습니다. 힘내세요!!"
+        static let resultTextNil = "시작과 종료시간이 동일하여 결과가 없습니다."
     }
     
     struct TextPlaceHolder {
-        static let text = "Write here"
+        static let text = "여기에 작성해주세요!"
     }
     
     struct DetailSection {
@@ -45,14 +45,13 @@ struct C {
     }
     
     struct SegueIdentifier {
-        static let toMain: String = "toMain"
+        static let mainFromOnboard: String = "mainFromOnboard"
         static let detailFromTable: String = "detailFromTable"
         static let onboardFromInfo: String = "onboardFromInfo"
     }
     
     struct Info {
-        static let infos: [String] = ["User Guide", "App Version", "Review", "Feedback"]
-        static let detail: [String] = ["", "1.0", "Please:)", "Please:)"]
+        static let infos: [String] = ["유저 가이드", "앱 버전", "리뷰", "피드백"]
     }
     
     struct Reminder {
@@ -62,22 +61,27 @@ struct C {
         static let setTime: Int = 0
 
         static let options: Dictionary<Int,String> = [
-            60:"1 hour ago",
-            30:"30 min ago",
-            10:"10 min ago",
-            0: "Set time"
+            60:"1시간 전",
+            30:"30분 전",
+            10:"10분 전",
+            0: "설정한 시간"
         ]
     }
     
+    struct UserDefaultsKey {
+        static let time: String = "reminderTime"
+        static let check: String = "checkUsingFirst"
+    }
+    
     struct Onboard {
-        static let titles: [String] = ["Mark", "Delete", "Complete", "Performance", "Result", "DarkMode"]
+        static let titles: [String] = ["마크:", "삭제:", "완료:", "퍼포먼스:", "결과:", "다크모드:"]
         static let bodies: [String] = [
-            "Swipe an item from left to right and mark the item!!",
-            "Swipe an item from right to left and delete the item!!",
-            "Tap the round button, and complete it!! And notifications are auto deleted.\nTap again to cancel the complete.",
-            "Set the start time and end time, notifications will arrive at each set time!!\nSet only the start time, and click the save button. And choose the options!!",
-            "Set the start and end times and tap the complete button. And check the result!!",
-            "Change the appearance of your device to see DoIT's light/dark mode"
+            "왼쪽에서 오른쪽으로 항목을 밀고 항목에 마크를 하세요!!",
+            "오른쪽에서 왼쪽으로 항목을 밀고 항목을 지우세요!!",
+            "동그라미 버튼을 누르고, 항목을 완료하세요!! 완료하면 알림은 자동으로 삭제됩니다. \n동그라미 버튼을 다시 누르면 완료가 취소됩니다.",
+            "시작과 종료 시간을 설정하고, 설정된 시간에 알림을 받으세요!! \n시작 시간만 설정하고, 저장 버튼을 눌러보세요. 그리고 옵션을 선택하세요!!",
+            "시작과 종료 시간을 설정하고 항목을 완료하세요. 그러면 결과를 확인할 수 있습니다!!",
+            "DoIT의 라이트와 다크모드를 보고싶다면 기기의 화면 스타일을 변경해보세요!"
         ]
         
         static let images: [UIImage?] = [

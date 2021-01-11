@@ -15,7 +15,7 @@ class DIDetailViewController: UIViewController {
     let currentDate: Date = Date()
     var startDate: Date = Date()
     var endDate: Date = Date()
-    let time = UserDefaults.standard.value(forKey: "reminderTime") as? Int ?? 10
+    let time = UserDefaults.standard.value(forKey: C.UserDefaultsKey.time) as? Int ?? 10
     
     var switchFlag = false {
         didSet {
@@ -96,7 +96,7 @@ class DIDetailViewController: UIViewController {
             dateLabel.text = dateFormatter.string(from: item.date)
             switchFlag = item.isSwitchOn
             deleteButton.isEnabled = true
-            deleteButton.title = "Delete"
+            deleteButton.title = "삭제"
         } else {
             dateLabel.text = dateFormatter.string(from: Date())
             switchFlag = false
@@ -114,19 +114,19 @@ class DIDetailViewController: UIViewController {
     func alertToUser(_ title: String, _ message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in }
+        let okAction = UIAlertAction(title: "확인", style: .default) { (action) in }
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
     
     /// startTime만 설정시 처리 메서드
     func selectPerformanceOrNoti() {
-        let alert = UIAlertController(title: "Alert", message: "End Date must be set later than the Start Date", preferredStyle: UIAlertController.Style.actionSheet)
+        let alert = UIAlertController(title: "알림", message: "종료 날짜는 시작 날짜 이후로 설정해야 합니다.", preferredStyle: UIAlertController.Style.actionSheet)
         
         let indexPathForDate = NSIndexPath(row: 0, section: C.DetailSection.date) as IndexPath
         let dateCell = tableView.cellForRow(at: indexPathForDate) as? DIDateTableViewCell
         
-        let onlyNotiAction = UIAlertAction(title: "Only Notify at start time", style: .default) { (action) in
+        let onlyNotiAction = UIAlertAction(title: "시작 시간에만 알림", style: .default) { (action) in
             dateCell?.endDatePicker.setDate(self.startDate, animated: false)
             self.endDate = self.startDate
             let newItem = self.saveItem()
@@ -134,23 +134,27 @@ class DIDetailViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
         
-        let setPerformAction = UIAlertAction(title: "Notify both time", style: .default) { (action) in
+        let setPerformAction = UIAlertAction(title: "시작과 종료 시간 모두 알림", style: .default) { (action) in
             dateCell?.endDatePicker.setDate(self.startDate, animated: false)
             self.endDate = self.startDate
         }
         
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { (action) in
+        }
+        
         alert.addAction(onlyNotiAction)
         alert.addAction(setPerformAction)
+        alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
     
     /// 시작시간 알림 처리 메서드
     func setNotifyOnce(_ newItem: DIItem) {
         if let item = self.item {
-            DINotiManager.shared.addNoti(item.id, item.title, "Start Time left \(time) min !!", item.startDate.alertTime())
+            DINotiManager.shared.addNoti(item.id, item.title, "시작까지 \(time)분 남았습니다!!", item.startDate.alertTime())
             DINotiManager.shared.scheduleNoti()
         } else {
-            DINotiManager.shared.addNoti(newItem.id, newItem.title, "Start Time left \(time) min !!", newItem.startDate.alertTime())
+            DINotiManager.shared.addNoti(newItem.id, newItem.title, "시작까지 \(time)분 남았습니다!!", newItem.startDate.alertTime())
             DINotiManager.shared.scheduleNoti()
         }
     }
@@ -158,12 +162,12 @@ class DIDetailViewController: UIViewController {
     /// 시작과 끝 시간 알림 처리 메서드
     func setNotifyTwice(_ newItem: DIItem) {
         if let item = self.item {
-            DINotiManager.shared.addNoti(item.id, item.title, "Start Time left \(time) min !!", item.startDate.alertTime())
-            DINotiManager.shared.addNoti(item.id, item.title, "End Time left \(time) min !!", item.endDate.alertTime())
+            DINotiManager.shared.addNoti(item.id, item.title, "시작까지 \(time)분 남았습니다!!", item.startDate.alertTime())
+            DINotiManager.shared.addNoti(item.id, item.title, "종료까지 \(time)분 남았습니다!!", item.endDate.alertTime())
             DINotiManager.shared.scheduleNoti()
         } else {
-            DINotiManager.shared.addNoti(newItem.id, newItem.title, "Start Time left \(time) min !!", newItem.startDate.alertTime())
-            DINotiManager.shared.addNoti(newItem.id, newItem.title, "End Time left \(time) min !!", newItem.endDate.alertTime())
+            DINotiManager.shared.addNoti(newItem.id, newItem.title, "시작까지 \(time)분 남았습니다!!", newItem.startDate.alertTime())
+            DINotiManager.shared.addNoti(newItem.id, newItem.title, "종료까지 \(time)분 남았습니다!!", newItem.endDate.alertTime())
             DINotiManager.shared.scheduleNoti()
         }
     }
@@ -178,14 +182,14 @@ class DIDetailViewController: UIViewController {
         let titleText = titleCell!.titleTextView.text ?? ""
         let descText = descCell!.descTextView.text ?? ""
         
-        if !titleText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty, titleText != "Write here" {
+        if !titleText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty, titleText != C.TextPlaceHolder.text {
             if self.item == nil {
                 newItem = DIItemManager.shared.insertItem(titleText, descText, startDate, endDate, switchFlag)
             } else {
                 newItem = DIItemManager.shared.updateItem(item, titleText, descText, startDate, endDate, switchFlag)
             }
         } else {
-            alertToUser("Alert", "Write the title please")
+            alertToUser("알림", "제목을 입력해주세요!")
         }
         return newItem
     }
@@ -272,17 +276,17 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == C.DetailSection.date {
-            let header = UIView(frame: CGRect(x: 15, y: 0, width: 250, height: 50))
+            let header = UIView(frame: CGRect(x: 20, y: 0, width: 250, height: 50))
             header.isUserInteractionEnabled = true
             
-            let label = UILabel(frame: CGRect(x: 15, y: 0, width: 120, height: 25))
-            label.text = "Performance"
+            let label = UILabel(frame: CGRect(x: 20, y: 0, width: 100, height: 25))
+            label.text = "퍼포먼스:"
             label.lineBreakMode = .byTruncatingTail
-            label.textAlignment = .center
+            label.textAlignment = .left
             label.font = UIFont.systemFont(ofSize: 20)
             header.addSubview(label)
             
-            let dateSwitch = UISwitch(frame: CGRect(x: 150, y: 0, width: 80, height: 50))
+            let dateSwitch = UISwitch(frame: CGRect(x: 120, y: 0, width: 80, height: 50))
             dateSwitch.isEnabled = true
             dateSwitch.isUserInteractionEnabled = true
             dateSwitch.setOn(item?.isSwitchOn ?? false, animated: false)

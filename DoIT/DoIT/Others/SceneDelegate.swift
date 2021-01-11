@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         var vc: UIViewController
         
-        if (UserDefaults.standard.value(forKey: "check") as? Bool) == nil {
+        if (UserDefaults.standard.value(forKey: C.UserDefaultsKey.check) as? Bool) == nil {
             vc = storyBoard.instantiateViewController(withIdentifier: C.StoryboardID.onboardVC)
         } else {
             vc = storyBoard.instantiateInitialViewController()!

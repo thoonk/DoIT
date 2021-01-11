@@ -158,14 +158,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Suh-nV-Fl5">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="여기에 작성해주세요!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Suh-nV-Fl5">
                                                     <rect key="frame" x="20" y="49" width="374" height="40"/>
                                                     <color key="backgroundColor" name="BackgroundColor"/>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emo-BB-bEN">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="할일:" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emo-BB-bEN">
                                                     <rect key="frame" x="20" y="11" width="70" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
@@ -194,14 +194,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="18d-YO-Tfz">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="여기에 작성해주세요!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="18d-YO-Tfz">
                                                     <rect key="frame" x="20" y="49" width="374" height="40"/>
                                                     <color key="backgroundColor" name="BackgroundColor"/>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKq-5W-xgY">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="메모:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKq-5W-xgY">
                                                     <rect key="frame" x="20" y="11" width="70" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
@@ -234,16 +234,16 @@
                                                     <rect key="frame" x="20" y="11" width="228.5" height="192"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="u2c-1u-PeJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="198" height="36"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="169" height="36"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUn-VR-B07">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="94" height="36"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시작 날짜:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUn-VR-B07">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="79.5" height="36"/>
                                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZQ-lf-9Ik">
-                                                                    <rect key="frame" x="104" y="0.0" width="94" height="36"/>
+                                                                    <rect key="frame" x="89.5" y="0.0" width="79.5" height="36"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                     <state key="normal">
                                                                         <imageReference key="image" image="calendar" catalog="system" symbolScale="large" renderingMode="template"/>
@@ -261,8 +261,8 @@
                                                                 <action selector="startDateChanged:" destination="E0m-SS-JIJ" eventType="valueChanged" id="1Ec-7V-iDY"/>
                                                             </connections>
                                                         </datePicker>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDZ-4e-rCV">
-                                                            <rect key="frame" x="0.0" y="104.5" width="85" height="24"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="종료 날짜:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDZ-4e-rCV">
+                                                            <rect key="frame" x="0.0" y="104.5" width="79.5" height="24"/>
                                                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -299,8 +299,8 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="NnP-Uw-9YA">
                                                     <rect key="frame" x="20" y="19" width="332" height="91"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hy6-gS-M9D">
-                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="24"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="퍼포먼스 결과:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hy6-gS-M9D">
+                                                            <rect key="frame" x="0.0" y="0.0" width="114" height="24"/>
                                                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -488,8 +488,8 @@
                                                         </stackView>
                                                     </subviews>
                                                 </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you want to see the results, set performance and complete it first." textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dF-DI-ANs">
-                                                    <rect key="frame" x="38" y="118" width="339" height="43"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="퍼포먼스를 설정하고 항목을 완료하면 결과를 확인할 수 있습니다!!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dF-DI-ANs">
+                                                    <rect key="frame" x="38" y="118" width="319" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -521,7 +521,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registeration Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kci-6s-whX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="등록 날짜" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kci-6s-whX">
                                 <rect key="frame" x="20" y="110" width="250" height="26"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="27"/>
                                 <nil key="textColor"/>
@@ -543,13 +543,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="MPt-hI-VHt">
                         <rightBarButtonItems>
-                            <barButtonItem title="Save" id="xpu-Xf-Lkr">
+                            <barButtonItem title="저장" id="xpu-Xf-Lkr">
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <connections>
                                     <action selector="completeBtnTapped:" destination="E0m-SS-JIJ" id="hY8-gl-Agz"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Delete" id="qiL-UJ-2D2">
+                            <barButtonItem title="삭제" id="qiL-UJ-2D2">
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <connections>
                                     <action selector="deleteBtnPressed:" destination="E0m-SS-JIJ" id="9NJ-iL-MMn"/>
@@ -778,7 +778,7 @@
                     <connections>
                         <outlet property="startedButton" destination="G5u-9J-2WQ" id="uAK-Cq-i9T"/>
                         <outlet property="tableView" destination="HIn-Wq-zqb" id="7YW-9O-fjl"/>
-                        <segue destination="TnH-7U-doI" kind="presentation" identifier="toMain" modalPresentationStyle="fullScreen" id="PaK-VT-TCV"/>
+                        <segue destination="TnH-7U-doI" kind="presentation" identifier="mainFromOnboard" modalPresentationStyle="fullScreen" id="PaK-VT-TCV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lJR-TP-W5b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

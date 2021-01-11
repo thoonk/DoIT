@@ -21,6 +21,7 @@
 		0899239E259DE8EA00D1A8A1 /* DIDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899239D259DE8EA00D1A8A1 /* DIDateTableViewCell.swift */; };
 		089923A2259DE8F000D1A8A1 /* DIResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089923A1259DE8F000D1A8A1 /* DIResultTableViewCell.swift */; };
 		089DCDAE25A4412A00BE7219 /* DIInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089DCDAD25A4412A00BE7219 /* DIInfoViewController.swift */; };
+		08AE6FAC25AC27F500855150 /* Pods_DoIT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DF4A4DDC070176412F85DA /* Pods_DoIT.framework */; };
 		08AE97F225A845F300679F97 /* DISettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AE97F125A845F300679F97 /* DISettingTableViewCell.swift */; };
 		08FDF556255A8E4F00640DDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF555255A8E4F00640DDF /* AppDelegate.swift */; };
 		08FDF558255A8E4F00640DDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF557255A8E4F00640DDF /* SceneDelegate.swift */; };
@@ -32,7 +33,6 @@
 		08FDF579255A9DB200640DDF /* DoITTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF578255A9DB200640DDF /* DoITTests.swift */; };
 		08FDF59D255AA3DC00640DDF /* DIItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF59C255AA3DC00640DDF /* DIItem.swift */; };
 		08FDF5A1255AA4CD00640DDF /* DIDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF5A0255AA4CD00640DDF /* DIDetailViewController.swift */; };
-		46504AD868897F2C348066D3 /* Pods_DoIT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DF4A4DDC070176412F85DA /* Pods_DoIT.framework */; };
 		4F961E123E668BB24D6C2263 /* Pods_DoITTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B56B2C74F92E7979837D27 /* Pods_DoITTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46504AD868897F2C348066D3 /* Pods_DoIT.framework in Frameworks */,
+				08AE6FAC25AC27F500855150 /* Pods_DoIT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +522,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -577,9 +577,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -593,17 +594,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Distribution: Kim Taehoon (U59PP2KXJ5)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U59PP2KXJ5;
 				INFOPLIST_FILE = DoIT/Others/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.thoonk.DoIT;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.thoonk.DoIT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "DoIT-Distribution";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -613,17 +619,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Distribution: Kim Taehoon (U59PP2KXJ5)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U59PP2KXJ5;
 				INFOPLIST_FILE = DoIT/Others/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.thoonk.DoIT;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.thoonk.DoIT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "DoIT-Distribution";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
