@@ -8,6 +8,13 @@
 import UIKit
 
 class DIInfoViewController: UIViewController {
+    
+    var version: String? {
+        guard let dictionary = Bundle.main.infoDictionary,
+              let version = dictionary["CFBundleShortVersionString"] as? String else { return nil }
+        return "\(version)"
+    }
+    
     // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
@@ -26,31 +33,31 @@ class DIInfoViewController: UIViewController {
     func setReminderTime() {
         
         let titleFont = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
-        let titleAttrString = NSMutableAttributedString(string: "Set Reminder Time", attributes: titleFont)
+        let titleAttrString = NSMutableAttributedString(string: "알림 시간 설정", attributes: titleFont)
         let messageFont = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
-        let messageAttrString = NSMutableAttributedString(string: "Choose the time you want to be notified", attributes: messageFont)
+        let messageAttrString = NSMutableAttributedString(string: "알림을 받고 싶은 시간을 선택하세요!", attributes: messageFont)
         
         let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
         actionSheet.setValue(titleAttrString, forKey: "attributedTitle")
         actionSheet.setValue(messageAttrString, forKey: "attributedMessage")
         
         let hourAction = UIAlertAction(title: C.Reminder.options[60], style: .default) { (action) in
-            UserDefaults.standard.set(C.Reminder.hour, forKey: "reminderTime")
+            UserDefaults.standard.set(C.Reminder.hour, forKey: C.UserDefaultsKey.time)
             self.tableView.reloadData()
         }
         let halfHourAction = UIAlertAction(title: C.Reminder.options[30], style: .default) { (action) in
-            UserDefaults.standard.set(C.Reminder.halfHour, forKey: "reminderTime")
+            UserDefaults.standard.set(C.Reminder.halfHour, forKey: C.UserDefaultsKey.time)
             self.tableView.reloadData()
         }
         let tenMinAction = UIAlertAction(title: C.Reminder.options[10], style: .default) { (action) in
-            UserDefaults.standard.set(C.Reminder.tenMin, forKey: "reminderTime")
+            UserDefaults.standard.set(C.Reminder.tenMin, forKey: C.UserDefaultsKey.time)
             self.tableView.reloadData()
         }
         let setTimeAction = UIAlertAction(title: C.Reminder.options[0], style: .default) { (action) in
-            UserDefaults.standard.set(C.Reminder.setTime, forKey: "reminderTime")
+            UserDefaults.standard.set(C.Reminder.setTime, forKey: C.UserDefaultsKey.time)
             self.tableView.reloadData()
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { (action) in
         }
         
         actionSheet.addAction(setTimeAction)
@@ -86,8 +93,8 @@ extension DIInfoViewController: UITableViewDataSource, UITableViewDelegate {
         case C.InfoSection.setting:
             guard let cell: DISettingTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.settingCell, for: indexPath) as? DISettingTableViewCell else { return UITableViewCell() }
             
-            cell.reminderLabel.text = "Reminder Time"
-            if let time: Int = UserDefaults.standard.value(forKey: "reminderTime") as? Int {
+            cell.reminderLabel.text = "알림 시간"
+            if let time: Int = UserDefaults.standard.value(forKey: C.UserDefaultsKey.time) as? Int {
                 cell.setTimeLabel.text = C.Reminder.options[time]
             } else {
                 cell.setTimeLabel.text = C.Reminder.options[10]
@@ -99,7 +106,14 @@ extension DIInfoViewController: UITableViewDataSource, UITableViewDelegate {
             guard let cell: DIInfoTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.infoCell, for: indexPath) as? DIInfoTableViewCell else { return UITableViewCell() }
             
             cell.infoLabel.text = C.Info.infos[indexPath.row]
-            cell.descLabel.text = C.Info.detail[indexPath.row]
+            switch indexPath.row {
+            case 0:
+                cell.descLabel.text = ""
+            case 1:
+                cell.descLabel.text = version
+            default:
+                cell.descLabel.text = "추가될 예정입니다:)"
+            }
             
             return cell
             
@@ -111,9 +125,9 @@ extension DIInfoViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Settings"
+            return "설정"
         case 1:
-            return "About DoIT"
+            return "DoIT에 대해"
         default:
             return ""
         }
