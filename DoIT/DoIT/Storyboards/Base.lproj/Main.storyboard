@@ -576,7 +576,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="drI-bs-aD3">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="50" width="414" height="758"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingCell" rowHeight="60" id="oEb-rt-lLi" customClass="DISettingTableViewCell" customModule="DoIT" customModuleProvider="target">
@@ -655,17 +655,30 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpE-us-SlS">
+                                <rect key="frame" x="343" y="6" width="51" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="닫기"/>
+                                <connections>
+                                    <action selector="closeBtnTapped:" destination="1i9-Rv-r8E" eventType="touchUpInside" id="8rz-sL-Xfx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZPN-8C-txM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="drI-bs-aD3" firstAttribute="top" secondItem="ZPN-8C-txM" secondAttribute="top" id="OUB-XL-9Y5"/>
+                            <constraint firstItem="QpE-us-SlS" firstAttribute="top" secondItem="ZPN-8C-txM" secondAttribute="top" constant="6" id="NU0-eo-8mM"/>
                             <constraint firstItem="drI-bs-aD3" firstAttribute="leading" secondItem="ZPN-8C-txM" secondAttribute="leading" id="Ty3-IM-2M9"/>
                             <constraint firstItem="drI-bs-aD3" firstAttribute="bottom" secondItem="ZPN-8C-txM" secondAttribute="bottom" id="ewF-yD-eKO"/>
                             <constraint firstItem="ZPN-8C-txM" firstAttribute="trailing" secondItem="drI-bs-aD3" secondAttribute="trailing" id="o7R-Gk-Rdd"/>
+                            <constraint firstItem="ZPN-8C-txM" firstAttribute="trailing" secondItem="QpE-us-SlS" secondAttribute="trailing" constant="20" id="riq-FU-Kbd"/>
+                            <constraint firstItem="QpE-us-SlS" firstAttribute="leading" secondItem="ZPN-8C-txM" secondAttribute="leading" constant="343" id="smX-sQ-pvs"/>
+                            <constraint firstItem="drI-bs-aD3" firstAttribute="top" secondItem="5bZ-ma-eyZ" secondAttribute="top" constant="50" id="suj-cX-Lua"/>
+                            <constraint firstItem="drI-bs-aD3" firstAttribute="top" secondItem="QpE-us-SlS" secondAttribute="bottom" constant="8" symbolic="YES" id="xNz-AX-OPx"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="QpE-us-SlS" id="Kh8-kL-IO7"/>
                         <outlet property="tableView" destination="drI-bs-aD3" id="jOd-hT-crd"/>
                         <segue destination="fel-K7-XWu" kind="presentation" identifier="onboardFromInfo" modalPresentationStyle="fullScreen" id="jbX-z8-5AD"/>
                     </connections>
