@@ -656,8 +656,8 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpE-us-SlS">
-                                <rect key="frame" x="343" y="6" width="51" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="324" y="6" width="70" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="닫기"/>
                                 <connections>
                                     <action selector="closeBtnTapped:" destination="1i9-Rv-r8E" eventType="touchUpInside" id="8rz-sL-Xfx"/>
@@ -671,8 +671,8 @@
                             <constraint firstItem="drI-bs-aD3" firstAttribute="leading" secondItem="ZPN-8C-txM" secondAttribute="leading" id="Ty3-IM-2M9"/>
                             <constraint firstItem="drI-bs-aD3" firstAttribute="bottom" secondItem="ZPN-8C-txM" secondAttribute="bottom" id="ewF-yD-eKO"/>
                             <constraint firstItem="ZPN-8C-txM" firstAttribute="trailing" secondItem="drI-bs-aD3" secondAttribute="trailing" id="o7R-Gk-Rdd"/>
+                            <constraint firstItem="QpE-us-SlS" firstAttribute="leading" secondItem="ZPN-8C-txM" secondAttribute="leading" constant="324" id="qRE-M0-z0P"/>
                             <constraint firstItem="ZPN-8C-txM" firstAttribute="trailing" secondItem="QpE-us-SlS" secondAttribute="trailing" constant="20" id="riq-FU-Kbd"/>
-                            <constraint firstItem="QpE-us-SlS" firstAttribute="leading" secondItem="ZPN-8C-txM" secondAttribute="leading" constant="343" id="smX-sQ-pvs"/>
                             <constraint firstItem="drI-bs-aD3" firstAttribute="top" secondItem="5bZ-ma-eyZ" secondAttribute="top" constant="50" id="suj-cX-Lua"/>
                             <constraint firstItem="drI-bs-aD3" firstAttribute="top" secondItem="QpE-us-SlS" secondAttribute="bottom" constant="8" symbolic="YES" id="xNz-AX-OPx"/>
                         </constraints>
