@@ -147,7 +147,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rha-6X-dOj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rha-6X-dOj">
                                 <rect key="frame" x="0.0" y="158" width="414" height="655"/>
                                 <color key="backgroundColor" name="BackgroundColor"/>
                                 <prototypes>
@@ -159,7 +159,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="여기에 작성해주세요!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Suh-nV-Fl5">
-                                                    <rect key="frame" x="20" y="49" width="374" height="40"/>
+                                                    <rect key="frame" x="20" y="41" width="374" height="42"/>
                                                     <color key="backgroundColor" name="BackgroundColor"/>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -173,12 +173,12 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Suh-nV-Fl5" firstAttribute="top" secondItem="emo-BB-bEN" secondAttribute="bottom" constant="14" id="JKj-Ib-RC8"/>
                                                 <constraint firstItem="emo-BB-bEN" firstAttribute="top" secondItem="dNG-yB-vUO" secondAttribute="topMargin" id="JOe-i2-a6j"/>
+                                                <constraint firstItem="Suh-nV-Fl5" firstAttribute="top" secondItem="emo-BB-bEN" secondAttribute="bottom" constant="6" id="LTs-vI-SYM"/>
                                                 <constraint firstItem="Suh-nV-Fl5" firstAttribute="trailing" secondItem="dNG-yB-vUO" secondAttribute="trailingMargin" id="Q20-0d-ade"/>
-                                                <constraint firstItem="Suh-nV-Fl5" firstAttribute="bottom" secondItem="dNG-yB-vUO" secondAttribute="bottomMargin" id="bIc-Oi-NMO"/>
                                                 <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="emo-BB-bEN" secondAttribute="trailing" constant="304" id="e7o-tW-VeP"/>
                                                 <constraint firstItem="emo-BB-bEN" firstAttribute="leading" secondItem="dNG-yB-vUO" secondAttribute="leadingMargin" id="eCC-NQ-yeo"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Suh-nV-Fl5" secondAttribute="bottom" constant="6" id="ieC-Wo-bKa"/>
                                                 <constraint firstItem="Suh-nV-Fl5" firstAttribute="leading" secondItem="dNG-yB-vUO" secondAttribute="leadingMargin" id="sGL-Fu-ehX"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -195,7 +195,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="여기에 작성해주세요!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="18d-YO-Tfz">
-                                                    <rect key="frame" x="20" y="49" width="374" height="40"/>
+                                                    <rect key="frame" x="20" y="41" width="374" height="42"/>
                                                     <color key="backgroundColor" name="BackgroundColor"/>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -210,11 +210,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="nKq-5W-xgY" firstAttribute="leading" secondItem="ZbN-wb-MRg" secondAttribute="leadingMargin" id="1YO-Fd-6Jl"/>
-                                                <constraint firstItem="18d-YO-Tfz" firstAttribute="top" secondItem="nKq-5W-xgY" secondAttribute="bottom" constant="14" id="1vg-be-lLl"/>
+                                                <constraint firstItem="18d-YO-Tfz" firstAttribute="top" secondItem="nKq-5W-xgY" secondAttribute="bottom" constant="6" id="2Lx-ca-hON"/>
                                                 <constraint firstItem="18d-YO-Tfz" firstAttribute="trailing" secondItem="ZbN-wb-MRg" secondAttribute="trailingMargin" id="DV2-dC-wg4"/>
                                                 <constraint firstItem="18d-YO-Tfz" firstAttribute="leading" secondItem="ZbN-wb-MRg" secondAttribute="leadingMargin" id="GDl-WK-Zey"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="18d-YO-Tfz" secondAttribute="bottom" constant="6" id="R53-kQ-Kor"/>
                                                 <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="nKq-5W-xgY" secondAttribute="trailing" constant="304" id="TcK-Lt-ACm"/>
-                                                <constraint firstItem="18d-YO-Tfz" firstAttribute="bottom" secondItem="ZbN-wb-MRg" secondAttribute="bottomMargin" id="ju7-5Y-d5W"/>
                                                 <constraint firstItem="nKq-5W-xgY" firstAttribute="top" secondItem="ZbN-wb-MRg" secondAttribute="topMargin" id="kLi-67-1z0"/>
                                             </constraints>
                                         </tableViewCellContentView>
