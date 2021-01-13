@@ -42,22 +42,13 @@ extension UITableViewCell: UITextViewDelegate {
     public func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == C.TextPlaceHolder.text {
             textView.text = ""
-            textView.textColor = UIColor { traitCollection in
-                switch traitCollection.userInterfaceStyle {
-                case .dark:
-                    return UIColor.white
-                default:
-                    return UIColor.black
-                }
-            }
-        } else {
-            textView.textColor = UIColor { traitCollection in
-                switch traitCollection.userInterfaceStyle {
-                case .dark:
-                    return UIColor.white
-                default:
-                    return UIColor.black
-                }
+        }
+        textView.textColor = UIColor { traitCollection in
+            switch traitCollection.userInterfaceStyle {
+            case .dark:
+                return UIColor.white
+            default:
+                return UIColor.black
             }
         }
     }
