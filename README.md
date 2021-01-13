@@ -1,5 +1,8 @@
 # DoIT - 퍼포먼스 키우기
 
+## 🍎 Download
+<a href="https://apps.apple.com/app/id1548302590"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" width=200/></a>
+
 ## 💡 OverView
 할일을 관리하면서 퍼포먼스 키우기!  
 시작과 종료 시간을 설정해서 퍼포먼스를 향상시키는 효과를 볼 수 있습니다.  
