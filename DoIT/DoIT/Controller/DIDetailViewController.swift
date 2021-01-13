@@ -40,7 +40,14 @@ class DIDetailViewController: UIViewController {
     
     @IBAction func completeBtnTapped(_ sender: UIButton) {
         var newItem: DIItem = DIItem()
-                
+        
+        let indexPathForDate = NSIndexPath(row: 0, section: C.DetailSection.date) as IndexPath
+        let dateCell = tableView.cellForRow(at: indexPathForDate) as? DIDateTableViewCell
+        
+        if self.item != nil {
+            startDate = dateCell?.startDatePicker.date ?? Date()
+            endDate = dateCell?.endDatePicker.date ?? Date()
+        }
         if startDate > endDate {
             selectPerformanceOrNoti()
         } else if startDate < endDate {
@@ -53,6 +60,7 @@ class DIDetailViewController: UIViewController {
             navigationController?.popViewController(animated: true)
         }
     }
+
     
     @IBAction func startDateChanged(_ sender: UIDatePicker) {
         startDate = sender.date
@@ -151,6 +159,7 @@ class DIDetailViewController: UIViewController {
     /// 시작시간 알림 처리 메서드
     func setNotifyOnce(_ newItem: DIItem) {
         if let item = self.item {
+            DINotiManager.shared.removeNoti(with: item.id)
             DINotiManager.shared.addNoti(item.id, item.title, "시작까지 \(time)분 남았습니다!!", item.startDate.alertTime())
             DINotiManager.shared.scheduleNoti()
         } else {
@@ -162,6 +171,7 @@ class DIDetailViewController: UIViewController {
     /// 시작과 끝 시간 알림 처리 메서드
     func setNotifyTwice(_ newItem: DIItem) {
         if let item = self.item {
+            DINotiManager.shared.removeNoti(with: item.id)
             DINotiManager.shared.addNoti(item.id, item.title, "시작까지 \(time)분 남았습니다!!", item.startDate.alertTime())
             DINotiManager.shared.addNoti(item.id, item.title, "종료까지 \(time)분 남았습니다!!", item.endDate.alertTime())
             DINotiManager.shared.scheduleNoti()
@@ -175,18 +185,29 @@ class DIDetailViewController: UIViewController {
     /// Item 저장 메서드
     func saveItem() -> DIItem {
         var newItem: DIItem = DIItem()
+        
         let indexPathForTitle = NSIndexPath(row: 0, section: C.DetailSection.title) as IndexPath
         let indexPathForDesc = NSIndexPath(row: 0, section: C.DetailSection.desc) as IndexPath
+        let indexPathForDate = NSIndexPath(row: 0, section: C.DetailSection.date) as IndexPath
+
         let titleCell = tableView.cellForRow(at: indexPathForTitle) as? DITitleTableViewCell
         let descCell = tableView.cellForRow(at: indexPathForDesc) as? DIDescTableViewCell
+        let dateCell = tableView.cellForRow(at: indexPathForDate) as? DIDateTableViewCell
+        
         let titleText = titleCell!.titleTextView.text ?? ""
         let descText = descCell!.descTextView.text ?? ""
+        let setStartDate = dateCell?.startDatePicker.date
+        let setEndDate = dateCell?.endDatePicker.date
         
         if !titleText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty, titleText != C.TextPlaceHolder.text {
             if self.item == nil {
                 newItem = DIItemManager.shared.insertItem(titleText, descText, startDate, endDate, switchFlag)
             } else {
-                newItem = DIItemManager.shared.updateItem(item, titleText, descText, startDate, endDate, switchFlag)
+                if self.item?.startDate == setStartDate || self.item?.endDate == setEndDate {
+                    newItem = DIItemManager.shared.updateItem(item, titleText, descText, setStartDate ?? Date(), setEndDate ?? Date(), switchFlag)
+                } else {
+                    newItem = DIItemManager.shared.updateItem(item, titleText, descText, startDate, endDate, switchFlag)
+                }
             }
         } else {
             alertToUser("알림", "제목을 입력해주세요!")
@@ -260,7 +281,6 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         if indexPath.section == C.DetailSection.date {
             if switchFlag == false {
                 return 0
@@ -276,7 +296,7 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == C.DetailSection.date {
-            let header = UIView(frame: CGRect(x: 20, y: 0, width: 250, height: 50))
+            let header = UIView(frame: CGRect(x: 20, y: 0, width: 250, height: 30))
             header.isUserInteractionEnabled = true
             
             let label = UILabel(frame: CGRect(x: 20, y: 0, width: 100, height: 25))
@@ -286,7 +306,7 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
             label.font = UIFont.systemFont(ofSize: 20)
             header.addSubview(label)
             
-            let dateSwitch = UISwitch(frame: CGRect(x: 120, y: 0, width: 80, height: 50))
+            let dateSwitch = UISwitch(frame: CGRect(x: 120, y: 0, width: 80, height: 30))
             dateSwitch.isEnabled = true
             dateSwitch.isUserInteractionEnabled = true
             dateSwitch.setOn(item?.isSwitchOn ?? false, animated: false)
@@ -302,7 +322,7 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == C.DetailSection.date {
-            return 50
+            return 30
         } else {
             return 0
         }
