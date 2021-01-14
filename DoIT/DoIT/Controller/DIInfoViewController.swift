@@ -8,7 +8,7 @@
 import UIKit
 
 class DIInfoViewController: UIViewController {
-    
+    // MARK: - Properties
     var version: String? {
         guard let dictionary = Bundle.main.infoDictionary,
               let version = dictionary["CFBundleShortVersionString"] as? String else { return nil }
@@ -16,7 +16,13 @@ class DIInfoViewController: UIViewController {
     }
     
     // MARK: - IBOutlet
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - IBAction
+    @IBAction func closeBtnTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -26,6 +32,9 @@ class DIInfoViewController: UIViewController {
         tableView.delegate = self
         // 비어 있는 row의 라인 제거
         tableView.tableFooterView = UIView(frame: .zero)
+        
+        closeButton.setTitle("닫기", for: .normal)
+        closeButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     // MARK: - UserDefinedFunction
