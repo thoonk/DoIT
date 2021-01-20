@@ -32,12 +32,13 @@ class DIListViewController: UIViewController {
         if let item = items?[indexPath.row] {
             if item.isComplete == false {
                 sender.setImage(UIImage(systemName: "largecircle.fill.circle"), for: .normal)
+                cell.titleLabel.attributedText = cell.titleLabel.text?.strikeThrough()
             } else {
                 DINotiManager.shared.removeNoti(with: item.id)
                 sender.setImage(UIImage(systemName: "circle"), for: .normal)
             }
         }
-        self.tableView.reloadData()
+        self.tableView.reloadRows(at: [indexPath], with: .fade)
     }
     
     // MARK: - LifeCycle
@@ -106,11 +107,11 @@ extension DIListViewController: UITableViewDelegate, UITableViewDataSource {
             
             if data.isComplete == true {
                 cell.completeButton.setImage(UIImage(systemName: "largecircle.fill.circle"), for: .normal)
+                cell.titleLabel.attributedText = cell.titleLabel.text?.strikeThrough()
             } else {
                 cell.completeButton.setImage(UIImage(systemName: "circle"), for: .normal)
             }
         }
-        
         return cell
     }
     
