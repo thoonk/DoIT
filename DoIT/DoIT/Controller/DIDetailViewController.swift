@@ -79,7 +79,6 @@ class DIDetailViewController: UIViewController {
     }
     
     @objc func switchChanged(_ sender: UISwitch) {
-        
         if sender.isOn {
             switchFlag = true
         } else {
@@ -97,16 +96,13 @@ class DIDetailViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
+        setDateLabelText()
         
         if let item = item {
-            dateLabel.text = dateFormatter.string(from: item.date)
             switchFlag = item.isSwitchOn
             deleteButton.isEnabled = true
             deleteButton.title = "삭제"
         } else {
-            dateLabel.text = dateFormatter.string(from: Date())
             switchFlag = false
             deleteButton.isEnabled = false
             deleteButton.title = ""
@@ -214,6 +210,19 @@ class DIDetailViewController: UIViewController {
         }
         return newItem
     }
+    
+    /// DateLabel의 텍스트 설정
+    func setDateLabelText() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.locale = Locale(identifier: "en")
+        
+        if let item = item {
+            dateLabel.text = dateFormatter.string(from: item.date)
+        } else {
+            dateLabel.text = dateFormatter.string(from: Date())
+        }
+    }
 }
 
 // MARK: - TableView
@@ -236,8 +245,9 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
             
             if let item = item {
                 cell.mappingData(item)
+                cell.setPlaceHolder(cell.titleTextView)
                 if item.isComplete == true {
-                    cell.titleTextView.isUserInteractionEnabled = false
+                    cell.titleTextView.isEditable = false
                 }
             }
             return cell
@@ -247,8 +257,9 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
             
             if let item = item {
                 cell.mappingData(item)
+                cell.setPlaceHolder(cell.descTextView)
                 if item.isComplete == true {
-                    cell.descTextView.isUserInteractionEnabled = false
+                    cell.descTextView.isEditable = false
                 }
             }
             return cell
@@ -261,6 +272,7 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
                 if item.isComplete == true {
                     cell.startDatePicker.isUserInteractionEnabled = false
                     cell.endDatePicker.isUserInteractionEnabled = false
+                    cell.todayButton.isUserInteractionEnabled = false
                 }
             }
             cell.todayButton.setImage(UIImage(systemName: "calendar"), for: .normal)
@@ -313,7 +325,16 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
             dateSwitch.onTintColor = UIColor(named: "ViewColor")
             dateSwitch.addTarget(self, action: #selector(switchChanged(_:)), for: UIControl.Event.valueChanged)
             
+            if let item = item {
+                if item.isComplete == true {
+                    dateSwitch.isEnabled = false
+                } else {
+                    dateSwitch.isEnabled = true
+                }
+            }
+            
             header.addSubview(dateSwitch)
+            
             return header
         } else {
             return nil
