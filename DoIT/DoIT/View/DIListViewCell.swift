@@ -23,4 +23,10 @@ class DIListViewCell: UITableViewCell {
         
         self.selectionStyle = .none
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        titleLabel.attributedText = nil
+    }
 }

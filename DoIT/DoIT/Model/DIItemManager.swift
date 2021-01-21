@@ -66,7 +66,7 @@ class DIItemManager: NSObject {
         var item: DIItem = DIItem()
         do {
             if let id = incrementID() {
-                item = DIItem(id: id, title: titleText, descript: descText, startDate: startDate, endDate: endDate, isSwitchOn: isSwitchOn)
+                item = DIItem(id: id, title: titleText, descript: descText, startDate: startDate, endDate: endDate, isSwitchOn: isSwitchOn, isMark: false)
                 try realm.write{
                     realm.add(item)
                 }
@@ -81,7 +81,7 @@ class DIItemManager: NSObject {
         let realm = self.getRealm()
         do {
             if var item = item {
-                item = DIItem(id: item.id, title: titleText, descript: descText, startDate: startDate, endDate: endDate, isSwitchOn: isSwitchOn)
+                item = DIItem(id: item.id, title: titleText, descript: descText, startDate: startDate, endDate: endDate, isSwitchOn: isSwitchOn, isMark: item.isMark)
                 try realm.write {
                     realm.add(item, update: .modified)
                 }

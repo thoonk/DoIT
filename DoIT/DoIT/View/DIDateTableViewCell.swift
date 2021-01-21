@@ -22,6 +22,9 @@ class DIDateTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         self.selectionStyle = .none
+        startDatePicker.locale = Locale(identifier: "en")
+        endDatePicker.locale = Locale(identifier: "en")
+        todayButton.setImage(UIImage(systemName: "calendar"), for: .normal)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

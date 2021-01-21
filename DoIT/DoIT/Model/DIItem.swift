@@ -21,7 +21,7 @@ class DIItem: Object {
     @objc dynamic var isMark: Bool = false
     @objc dynamic var isSwitchOn: Bool = false
     
-    convenience init (id: Int, title: String, descript: String, startDate: Date, endDate: Date, isSwitchOn: Bool) {
+    convenience init (id: Int, title: String, descript: String, startDate: Date, endDate: Date, isSwitchOn: Bool, isMark: Bool) {
         self.init()
         self.id = id
         self.title = title
@@ -29,6 +29,7 @@ class DIItem: Object {
         self.startDate = startDate
         self.endDate = endDate
         self.isSwitchOn = isSwitchOn
+        self.isMark = isMark
     }
     
     override class func primaryKey() -> String? {

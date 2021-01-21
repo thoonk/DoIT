@@ -57,6 +57,15 @@ extension UITableViewCell: UITextViewDelegate {
         if textView.text.isEmpty {
             textView.text = C.TextPlaceHolder.text
             textView.textColor = UIColor.placeholderText
+        } else {
+            textView.textColor = UIColor { traitCollection in
+                switch traitCollection.userInterfaceStyle {
+                case .dark:
+                    return UIColor.white
+                default:
+                    return UIColor.black
+                }
+            }
         }
     }
     

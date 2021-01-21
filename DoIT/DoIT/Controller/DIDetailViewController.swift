@@ -16,7 +16,7 @@ class DIDetailViewController: UIViewController {
     var startDate: Date = Date()
     var endDate: Date = Date()
     let time = UserDefaults.standard.value(forKey: C.UserDefaultsKey.time) as? Int ?? 10
-    
+    /// 퍼포먼스 스위치 플래그
     var switchFlag = false {
         didSet {
             let indexPathForDate = NSIndexPath(row: 0, section: C.DetailSection.date) as IndexPath
@@ -28,6 +28,7 @@ class DIDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var deleteButton: UIBarButtonItem!
+    @IBOutlet weak var completeImageView: UIImageView!
     
     // MARK: - IBAction
     @IBAction func deleteBtnPressed(_ sender: UIButton) {
@@ -38,7 +39,7 @@ class DIDetailViewController: UIViewController {
         }
     }
     
-    @IBAction func completeBtnTapped(_ sender: UIButton) {
+    @IBAction func saveBtnTapped(_ sender: UIButton) {
         var newItem: DIItem = DIItem()
         
         let indexPathForDate = NSIndexPath(row: 0, section: C.DetailSection.date) as IndexPath
@@ -60,7 +61,6 @@ class DIDetailViewController: UIViewController {
             navigationController?.popViewController(animated: true)
         }
     }
-
     
     @IBAction func startDateChanged(_ sender: UIDatePicker) {
         startDate = sender.date
@@ -78,8 +78,11 @@ class DIDetailViewController: UIViewController {
         dateCell?.endDatePicker.setDate(Date(), animated: true)
     }
     
+    @IBAction func doneBtnTapped(sender: Any) {
+        self.view.endEditing(true)
+    }
+    
     @objc func switchChanged(_ sender: UISwitch) {
-        
         if sender.isOn {
             switchFlag = true
         } else {
@@ -91,26 +94,9 @@ class DIDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.estimatedRowHeight = 200
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        
-        if let item = item {
-            dateLabel.text = dateFormatter.string(from: item.date)
-            switchFlag = item.isSwitchOn
-            deleteButton.isEnabled = true
-            deleteButton.title = "삭제"
-        } else {
-            dateLabel.text = dateFormatter.string(from: Date())
-            switchFlag = false
-            deleteButton.isEnabled = false
-            deleteButton.title = ""
-        }
+        setTableView()
+        setDateLabelText()
+        setDetailUI()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -147,8 +133,7 @@ class DIDetailViewController: UIViewController {
             self.endDate = self.startDate
         }
         
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { (action) in
-        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
         
         alert.addAction(onlyNotiAction)
         alert.addAction(setPerformAction)
@@ -214,6 +199,55 @@ class DIDetailViewController: UIViewController {
         }
         return newItem
     }
+    
+    /// DateLabel의 텍스트 설정
+    func setDateLabelText() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.locale = Locale(identifier: "en")
+        
+        if let item = item {
+            dateLabel.text = dateFormatter.string(from: item.date)
+        } else {
+            dateLabel.text = dateFormatter.string(from: Date())
+        }
+    }
+    
+    /// TableView 설정
+    func setTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.estimatedRowHeight = 200
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+    }
+    
+    /// DetailViewUI 설정
+    func setDetailUI() {
+        if let item = item {
+            switchFlag = item.isSwitchOn
+            deleteButton.isEnabled = true
+            deleteButton.title = "삭제"
+            
+            if item.isComplete == false {
+                completeImageView.isHidden = true
+            }
+        } else {
+            switchFlag = false
+            deleteButton.isEnabled = false
+            deleteButton.title = ""
+            completeImageView.isHidden = true
+        }
+    }
+    
+    /// 키보드 완료 버튼 설정
+    func setKeyboardDoneBtn() -> UIToolbar {
+        let bar = UIToolbar()
+        let doneBtn = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneBtnTapped))
+        bar.items = [doneBtn]
+        bar.sizeToFit()
+        return bar
+    }
 }
 
 // MARK: - TableView
@@ -236,10 +270,15 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
             
             if let item = item {
                 cell.mappingData(item)
+                cell.setPlaceHolder(cell.titleTextView)
                 if item.isComplete == true {
-                    cell.titleTextView.isUserInteractionEnabled = false
+                    cell.titleTextView.isEditable = false
                 }
             }
+            
+            let bar = setKeyboardDoneBtn()
+            cell.titleTextView.inputAccessoryView = bar
+            
             return cell
         
         case C.DetailSection.desc:
@@ -247,10 +286,15 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
             
             if let item = item {
                 cell.mappingData(item)
+                cell.setPlaceHolder(cell.descTextView)
                 if item.isComplete == true {
-                    cell.descTextView.isUserInteractionEnabled = false
+                    cell.descTextView.isEditable = false
                 }
             }
+            
+            let bar = setKeyboardDoneBtn()
+            cell.descTextView.inputAccessoryView = bar
+            
             return cell
             
         case C.DetailSection.date:
@@ -261,10 +305,10 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
                 if item.isComplete == true {
                     cell.startDatePicker.isUserInteractionEnabled = false
                     cell.endDatePicker.isUserInteractionEnabled = false
+                    cell.todayButton.isUserInteractionEnabled = false
                 }
             }
             cell.todayButton.setImage(UIImage(systemName: "calendar"), for: .normal)
-            
             return cell
             
         case C.DetailSection.result:
@@ -313,7 +357,16 @@ extension DIDetailViewController: UITableViewDelegate, UITableViewDataSource {
             dateSwitch.onTintColor = UIColor(named: "ViewColor")
             dateSwitch.addTarget(self, action: #selector(switchChanged(_:)), for: UIControl.Event.valueChanged)
             
+            if let item = item {
+                if item.isComplete == true {
+                    dateSwitch.isEnabled = false
+                } else {
+                    dateSwitch.isEnabled = true
+                }
+            }
+            
             header.addSubview(dateSwitch)
+            
             return header
         } else {
             return nil
