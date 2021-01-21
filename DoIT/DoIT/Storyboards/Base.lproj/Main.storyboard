@@ -246,8 +246,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sgs-Gg-eYa">
-                                                    <rect key="frame" x="20" y="11" width="228.5" height="192"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="sgs-Gg-eYa">
+                                                    <rect key="frame" x="20" y="7" width="228.5" height="186"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="u2c-1u-PeJ">
                                                             <rect key="frame" x="0.0" y="0.0" width="169" height="36"/>
@@ -271,20 +271,20 @@
                                                             </subviews>
                                                         </stackView>
                                                         <datePicker contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="wph-Uq-CaN">
-                                                            <rect key="frame" x="0.0" y="41" width="228.5" height="58.5"/>
+                                                            <rect key="frame" x="0.0" y="39" width="228.5" height="58.5"/>
                                                             <color key="tintColor" name="AccentColor"/>
                                                             <connections>
                                                                 <action selector="startDateChanged:" destination="E0m-SS-JIJ" eventType="valueChanged" id="1Ec-7V-iDY"/>
                                                             </connections>
                                                         </datePicker>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="종료 날짜:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDZ-4e-rCV">
-                                                            <rect key="frame" x="0.0" y="104.5" width="79.5" height="24"/>
+                                                            <rect key="frame" x="0.0" y="100.5" width="79.5" height="24"/>
                                                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <datePicker contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="ncU-py-epv">
-                                                            <rect key="frame" x="0.0" y="133.5" width="228.5" height="58.5"/>
+                                                            <rect key="frame" x="0.0" y="127.5" width="228.5" height="58.5"/>
                                                             <color key="tintColor" name="AccentColor"/>
                                                             <connections>
                                                                 <action selector="endDateChanged:" destination="E0m-SS-JIJ" eventType="valueChanged" id="olT-bJ-To2"/>
@@ -294,8 +294,9 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="sgs-Gg-eYa" firstAttribute="top" secondItem="iQN-pG-xPW" secondAttribute="top" constant="7" id="3fY-4A-vTk"/>
                                                 <constraint firstItem="sgs-Gg-eYa" firstAttribute="leading" secondItem="iQN-pG-xPW" secondAttribute="leadingMargin" id="HPO-zE-8cU"/>
-                                                <constraint firstItem="sgs-Gg-eYa" firstAttribute="top" secondItem="iQN-pG-xPW" secondAttribute="topMargin" id="uoe-6E-Ip4"/>
+                                                <constraint firstAttribute="bottom" secondItem="sgs-Gg-eYa" secondAttribute="bottom" constant="7" id="S8e-OY-nvY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="BackgroundColor"/>
@@ -305,15 +306,15 @@
                                             <outlet property="todayButton" destination="SZQ-lf-9Ik" id="Act-Zn-ibk"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultCell" rowHeight="180" id="3Gx-NU-0iJ" customClass="DIResultTableViewCell" customModule="DoIT" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="428" width="414" height="180"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultCell" rowHeight="200" id="3Gx-NU-0iJ" customClass="DIResultTableViewCell" customModule="DoIT" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="428" width="414" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Gx-NU-0iJ" id="8iL-2j-dUu">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="NnP-Uw-9YA">
-                                                    <rect key="frame" x="20" y="19" width="332" height="91"/>
+                                                    <rect key="frame" x="20" y="11" width="332" height="91"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="퍼포먼스 결과:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hy6-gS-M9D">
                                                             <rect key="frame" x="0.0" y="0.0" width="114" height="24"/>
@@ -505,19 +506,21 @@
                                                     </subviews>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="퍼포먼스를 설정하고 항목을 완료하면 결과를 확인할 수 있습니다!!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dF-DI-ANs">
-                                                    <rect key="frame" x="38" y="118" width="319" height="43"/>
+                                                    <rect key="frame" x="20" y="124" width="332" height="43"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="332" id="qAa-Sj-GrD"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="NnP-Uw-9YA" firstAttribute="top" secondItem="8iL-2j-dUu" secondAttribute="topMargin" constant="8" id="2g5-AB-C4W"/>
-                                                <constraint firstItem="1dF-DI-ANs" firstAttribute="leading" secondItem="8iL-2j-dUu" secondAttribute="leadingMargin" constant="18" id="IyY-nK-5Fr"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="1dF-DI-ANs" secondAttribute="trailing" constant="17" id="KdL-rq-rLG"/>
+                                                <constraint firstItem="NnP-Uw-9YA" firstAttribute="top" secondItem="8iL-2j-dUu" secondAttribute="topMargin" id="3QH-9i-ieN"/>
                                                 <constraint firstItem="NnP-Uw-9YA" firstAttribute="leading" secondItem="8iL-2j-dUu" secondAttribute="leadingMargin" id="RFC-rU-SuM"/>
-                                                <constraint firstItem="1dF-DI-ANs" firstAttribute="top" secondItem="NnP-Uw-9YA" secondAttribute="bottom" constant="8" id="UXF-yy-IcJ"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="1dF-DI-ANs" secondAttribute="bottom" constant="8" id="hCL-6F-zMt"/>
+                                                <constraint firstItem="1dF-DI-ANs" firstAttribute="leading" secondItem="8iL-2j-dUu" secondAttribute="leadingMargin" id="hMw-Sf-E82"/>
+                                                <constraint firstItem="1dF-DI-ANs" firstAttribute="top" secondItem="NnP-Uw-9YA" secondAttribute="bottom" constant="22" id="sdc-7V-b9a"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="1dF-DI-ANs" secondAttribute="trailing" constant="10" id="tRz-pK-2tU"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="BackgroundColor"/>
@@ -543,15 +546,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="complete_icon" translatesAutoresizingMaskIntoConstraints="NO" id="e4P-l5-pMY">
+                                <rect key="frame" x="354" y="103" width="40" height="40"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kqY-o0-ZuJ"/>
                         <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Rha-6X-dOj" firstAttribute="top" secondItem="Kci-6s-whX" secondAttribute="bottom" constant="22" id="34Y-aA-kzv"/>
+                            <constraint firstItem="e4P-l5-pMY" firstAttribute="leading" secondItem="Kci-6s-whX" secondAttribute="trailing" constant="84" id="7lf-H3-cC3"/>
                             <constraint firstItem="Rha-6X-dOj" firstAttribute="top" secondItem="kqY-o0-ZuJ" secondAttribute="top" constant="70" id="Jjk-cx-EEP"/>
                             <constraint firstItem="kqY-o0-ZuJ" firstAttribute="trailing" secondItem="Kci-6s-whX" secondAttribute="trailing" constant="144" id="O7z-X1-fd6"/>
                             <constraint firstItem="kqY-o0-ZuJ" firstAttribute="bottom" secondItem="Rha-6X-dOj" secondAttribute="bottom" id="SOv-Mv-Xlx"/>
+                            <constraint firstItem="kqY-o0-ZuJ" firstAttribute="trailing" secondItem="e4P-l5-pMY" secondAttribute="trailing" constant="20" id="Yel-P5-Kij"/>
+                            <constraint firstItem="e4P-l5-pMY" firstAttribute="top" secondItem="kqY-o0-ZuJ" secondAttribute="top" constant="15" id="d7d-hy-GS7"/>
                             <constraint firstItem="kqY-o0-ZuJ" firstAttribute="trailing" secondItem="Rha-6X-dOj" secondAttribute="trailing" id="khA-sr-wqT"/>
+                            <constraint firstItem="Rha-6X-dOj" firstAttribute="top" secondItem="e4P-l5-pMY" secondAttribute="bottom" constant="15" id="l0G-VB-eg2"/>
                             <constraint firstItem="Kci-6s-whX" firstAttribute="top" secondItem="kqY-o0-ZuJ" secondAttribute="top" constant="22" id="nKT-xl-vhz"/>
                             <constraint firstItem="Rha-6X-dOj" firstAttribute="leading" secondItem="kqY-o0-ZuJ" secondAttribute="leading" id="rzM-Sy-Qxw"/>
                             <constraint firstItem="Kci-6s-whX" firstAttribute="leading" secondItem="kqY-o0-ZuJ" secondAttribute="leading" constant="20" id="xcc-tG-NOC"/>
@@ -562,7 +572,7 @@
                             <barButtonItem title="저장" id="xpu-Xf-Lkr">
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <connections>
-                                    <action selector="completeBtnTapped:" destination="E0m-SS-JIJ" id="hY8-gl-Agz"/>
+                                    <action selector="saveBtnTapped:" destination="E0m-SS-JIJ" id="5b0-EQ-MVT"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="삭제" id="qiL-UJ-2D2">
@@ -574,6 +584,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="completeImageView" destination="e4P-l5-pMY" id="d88-Zc-o8F"/>
                         <outlet property="dateLabel" destination="Kci-6s-whX" id="x4c-RW-U9p"/>
                         <outlet property="deleteButton" destination="qiL-UJ-2D2" id="h4l-PX-dq6"/>
                         <outlet property="tableView" destination="Rha-6X-dOj" id="1AE-vs-sg3"/>
@@ -836,6 +847,7 @@
     <color key="tintColor" systemColor="labelColor"/>
     <resources>
         <image name="calendar" catalog="system" width="128" height="106"/>
+        <image name="complete_icon" width="512" height="512"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="largecircle.fill.circle" catalog="system" width="128" height="121"/>
         <image name="resultMore" width="334" height="138"/>
