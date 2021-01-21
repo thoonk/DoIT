@@ -11,10 +11,10 @@ import UIKit
 struct C {
     
     struct Result {
-        static let resultTextInit = "퍼포먼스를 설정하고 항목을 완료하면 결과를 확인할 수 있습니다!!"
+        static let resultTextInit = "퍼포먼스를 설정하고 할일을 완료하면 결과를 확인할 수 있습니다!!"
         static let resultTextLess = "만큼 종료 날짜보다 더 빨리 일을 끝냈습니다. 축하드립니다!!"
         static let resultTextMore = "만큼 종료 날짜보다 더 늦게 일을 끝냈습니다. 힘내세요!!"
-        static let resultTextNil = "시작과 종료시간이 동일하여 결과가 없습니다."
+        static let resultTextNil = "시작과 종료시간이 동일하여 결과가 나오지 않습니다."
     }
     
     struct TextPlaceHolder {
@@ -71,6 +71,7 @@ struct C {
     struct UserDefaultsKey {
         static let time: String = "reminderTime"
         static let check: String = "checkUsingFirst"
+        static let review: String = "review"
     }
     
     struct Onboard {
