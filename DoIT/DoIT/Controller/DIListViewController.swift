@@ -27,17 +27,17 @@ class DIListViewController: UIViewController {
         let cell: DIListViewCell = contentView?.superview as! DIListViewCell
         let indexPath = tableView.indexPath(for: cell)!
 
-        DIItemManager.shared.updateComplete(with: (items?[indexPath.row])!)
-        
         if let item = items?[indexPath.row] {
             if item.isComplete == false {
                 sender.setImage(UIImage(systemName: "largecircle.fill.circle"), for: .normal)
                 cell.titleLabel.attributedText = cell.titleLabel.text?.strikeThrough()
-            } else {
                 DINotiManager.shared.removeNoti(with: item.id)
+            } else {
                 sender.setImage(UIImage(systemName: "circle"), for: .normal)
             }
         }
+        
+        DIItemManager.shared.updateComplete(with: (items?[indexPath.row])!)
         self.tableView.reloadRows(at: [indexPath], with: .fade)
     }
     
