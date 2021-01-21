@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class DIInfoViewController: UIViewController {
     // MARK: - Properties
@@ -35,6 +36,12 @@ class DIInfoViewController: UIViewController {
         
         closeButton.setTitle("닫기", for: .normal)
         closeButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        if isReviewToBeDisplayed(10) == true {
+            if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                        SKStoreReviewController.requestReview(in: scene)
+            }
+        }
     }
     
     // MARK: - UserDefinedFunction
@@ -75,6 +82,18 @@ class DIInfoViewController: UIViewController {
         actionSheet.addAction(hourAction)
         actionSheet.addAction(cancelAction)
         present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func isReviewToBeDisplayed(_ minCount: Int) -> Bool {
+        let launchCount = UserDefaults.standard.integer(forKey: C.UserDefaultsKey.review)
+        
+        if launchCount == minCount {
+            UserDefaults.standard.set(0, forKey: C.UserDefaultsKey.review)
+            return true
+        } else {
+            UserDefaults.standard.set(launchCount+1, forKey: C.UserDefaultsKey.review)
+            return false
+        }
     }
 }
 // MARK: - TableView
