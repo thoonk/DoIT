@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DIOnboardTableViewCell: UITableViewCell {
+final class DIOnboardTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var bodyLabel: UILabel!
@@ -18,11 +18,4 @@ class DIOnboardTableViewCell: UITableViewCell {
         
         self.selectionStyle = .none
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class DINotiManager {
+final class DINotiManager {
     
     static let shared = DINotiManager()
     private var notifications = [DINoti]()
@@ -26,8 +26,19 @@ class DINotiManager {
         }
     }
     // 알림 추가
-    func addNoti(_ id: Int, _ title: String, _ body: String, _ date: Date) {
-        notifications.append(DINoti(identifier: NSUUID().uuidString, title: title, body: body, date: date, itemId: id))
+    func addNoti(
+        _ id: Int,
+        _ title: String,
+        _ body: String,
+        _ date: Date
+    ) {
+        notifications.append(DINoti(
+            identifier: NSUUID().uuidString,
+            title: title,
+            body: body,
+            date: date,
+            itemId: id
+        ))
     }
     // 알림 설정
     func scheduleNoti() {
@@ -37,10 +48,20 @@ class DINotiManager {
             notiContent.body = noti.body
             notiContent.sound = UNNotificationSound.default
             
-            let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute], from: noti.date)
+            let triggerDate = Calendar.current.dateComponents(
+                [.year,.month,.day,.hour,.minute],
+                from: noti.date
+            )
             
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-            let request = UNNotificationRequest(identifier: noti.identifier, content: notiContent, trigger: trigger)
+            let trigger = UNCalendarNotificationTrigger(
+                dateMatching: triggerDate,
+                repeats: false
+            )
+            let request = UNNotificationRequest(
+                identifier: noti.identifier,
+                content: notiContent,
+                trigger: trigger
+            )
             
             UNUserNotificationCenter.current().add(request) { error in
                 if let error = error {
@@ -56,7 +77,9 @@ class DINotiManager {
             identifiers.append(noti.getNotiForItemId(itemId: target))
         }
         
-        UNUserNotificationCenter.current().getPendingNotificationRequests { (notiRequests) in
+        UNUserNotificationCenter
+            .current()
+            .getPendingNotificationRequests { notiRequests in
             var removeIdentifiers = [String]()
             for noti: UNNotificationRequest in notiRequests {
                 for id in identifiers {
@@ -65,7 +88,11 @@ class DINotiManager {
                     }
                 }
             }
-            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: removeIdentifiers)
+            UNUserNotificationCenter
+                .current()
+                .removePendingNotificationRequests(
+                    withIdentifiers: removeIdentifiers
+                )
         }
     }
 }

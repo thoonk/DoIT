@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DIResultTableViewCell: UITableViewCell {
+final class DIResultTableViewCell: UITableViewCell {
 
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var yearView: UIView!
@@ -24,7 +24,18 @@ class DIResultTableViewCell: UITableViewCell {
     
     func mappingData(_ data: DIItem) {
         let time = computeDate(data)
-        if case let (year?, month?, day?, hour?, minute?) = (time.year,time.month,time.day,time.hour,time.minute) {
+        if case let (
+            year?,
+            month?,
+            day?,
+            hour?,
+            minute?
+        ) = (
+            time.year,
+            time.month,
+            time.day,
+            time.hour,
+            time.minute) {
             
             yearLabel.text = "\(year)"
             monLabel.text = "\(month)"
@@ -41,11 +52,19 @@ class DIResultTableViewCell: UITableViewCell {
                 let calendar = Calendar.current
                 
                 if data.endDate > data.completeDate! {
-                    let time = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: data.completeDate!, to: data.endDate)
+                    let time = calendar.dateComponents(
+                        [.year,.month,.day,.hour,.minute,.second],
+                        from: data.completeDate!,
+                        to: data.endDate
+                    )
                     resultLabel.text = C.Result.resultTextLess
                     return time
                 } else {
-                    let time = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: data.endDate, to: data.completeDate!)
+                    let time = calendar.dateComponents(
+                        [.year,.month,.day,.hour,.minute,.second],
+                        from: data.endDate,
+                        to: data.completeDate!
+                    )
                     resultLabel.text = C.Result.resultTextMore
                     return time
                 }
@@ -73,11 +92,5 @@ class DIResultTableViewCell: UITableViewCell {
         self.selectionStyle = .none
         resultLabel.text = C.Result.resultTextInit
         viewsUI([yearView,monView,dayView,hourView,minView])
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
 }

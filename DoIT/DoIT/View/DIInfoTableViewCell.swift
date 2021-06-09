@@ -7,22 +7,14 @@
 
 import UIKit
 
-class DIInfoTableViewCell: UITableViewCell {
+final class DIInfoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
-    
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.selectionStyle = .none
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

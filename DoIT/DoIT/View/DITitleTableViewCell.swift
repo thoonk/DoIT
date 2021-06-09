@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DITitleTableViewCell: UITableViewCell {
+final class DITitleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleTextView: UITextView!
     

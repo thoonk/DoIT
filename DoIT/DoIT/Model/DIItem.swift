@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class DIItem: Object {
+final class DIItem: Object {
     
     @objc dynamic var id = 0
     @objc dynamic var title = ""
@@ -21,7 +21,15 @@ class DIItem: Object {
     @objc dynamic var isMark: Bool = false
     @objc dynamic var isSwitchOn: Bool = false
     
-    convenience init (id: Int, title: String, descript: String, startDate: Date, endDate: Date, isSwitchOn: Bool, isMark: Bool) {
+    convenience init (
+        id: Int,
+        title: String,
+        descript: String,
+        startDate: Date,
+        endDate: Date,
+        isSwitchOn: Bool,
+        isMark: Bool
+    ) {
         self.init()
         self.id = id
         self.title = title

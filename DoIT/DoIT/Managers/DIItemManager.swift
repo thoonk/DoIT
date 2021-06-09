@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class DIItemManager: NSObject {
+final class DIItemManager: NSObject {
     
     static let shared = DIItemManager()
     
@@ -61,12 +61,26 @@ class DIItemManager: NSObject {
         return realm.objects(DIItem.self).sorted(byKeyPath: "id", ascending: true)
     }
     
-    func insertItem(_ titleText: String, _ descText: String, _ startDate: Date, _ endDate: Date, _ isSwitchOn: Bool) -> DIItem {
+    func insertItem(
+        _ titleText: String,
+        _ descText: String,
+        _ startDate: Date,
+        _ endDate: Date,
+        _ isSwitchOn: Bool
+    ) -> DIItem {
         let realm = self.getRealm()
         var item: DIItem = DIItem()
         do {
             if let id = incrementID() {
-                item = DIItem(id: id, title: titleText, descript: descText, startDate: startDate, endDate: endDate, isSwitchOn: isSwitchOn, isMark: false)
+                item = DIItem(
+                    id: id,
+                    title: titleText,
+                    descript: descText,
+                    startDate: startDate,
+                    endDate: endDate,
+                    isSwitchOn: isSwitchOn,
+                    isMark: false
+                )
                 try realm.write{
                     realm.add(item)
                 }
@@ -77,11 +91,26 @@ class DIItemManager: NSObject {
         return item
     }
     
-    func updateItem(_ item: DIItem?, _ titleText: String, _ descText: String, _ startDate: Date, _ endDate: Date, _ isSwitchOn: Bool) -> DIItem {
+    func updateItem(
+        _ item: DIItem?,
+        _ titleText: String,
+        _ descText: String,
+        _ startDate: Date,
+        _ endDate: Date,
+        _ isSwitchOn: Bool
+    ) -> DIItem {
         let realm = self.getRealm()
         do {
             if var item = item {
-                item = DIItem(id: item.id, title: titleText, descript: descText, startDate: startDate, endDate: endDate, isSwitchOn: isSwitchOn, isMark: item.isMark)
+                item = DIItem(
+                    id: item.id,
+                    title: titleText,
+                    descript: descText,
+                    startDate: startDate,
+                    endDate: endDate,
+                    isSwitchOn: isSwitchOn,
+                    isMark: item.isMark
+                )
                 try realm.write {
                     realm.add(item, update: .modified)
                 }
