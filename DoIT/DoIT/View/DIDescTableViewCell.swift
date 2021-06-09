@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DIDescTableViewCell: UITableViewCell {
+final class DIDescTableViewCell: UITableViewCell {
 
     @IBOutlet weak var descTextView: UITextView!
     

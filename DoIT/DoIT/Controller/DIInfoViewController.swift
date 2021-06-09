@@ -8,11 +8,12 @@
 import UIKit
 import StoreKit
 
-class DIInfoViewController: UIViewController {
+final class DIInfoViewController: UIViewController {
     // MARK: - Properties
     var version: String? {
         guard let dictionary = Bundle.main.infoDictionary,
-              let version = dictionary["CFBundleShortVersionString"] as? String else { return nil }
+              let version = dictionary["CFBundleShortVersionString"] as? String
+        else { return nil }
         return "\(version)"
     }
     
@@ -38,8 +39,10 @@ class DIInfoViewController: UIViewController {
         closeButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         if isReviewToBeDisplayed(10) == true {
-            if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                        SKStoreReviewController.requestReview(in: scene)
+            if let scene = UIApplication.shared.connectedScenes.first(
+                where: { $0.activationState == .foregroundActive }
+            ) as? UIWindowScene {
+                SKStoreReviewController.requestReview(in: scene)
             }
         }
     }
@@ -48,33 +51,70 @@ class DIInfoViewController: UIViewController {
     /// 알림 시간 선택할 수 있는 함수
     func setReminderTime() {
         
-        let titleFont = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
-        let titleAttrString = NSMutableAttributedString(string: "알림 시간 설정", attributes: titleFont)
-        let messageFont = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
-        let messageAttrString = NSMutableAttributedString(string: "알림을 받고 싶은 시간을 선택하세요!", attributes: messageFont)
+        let titleFont = [
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)
+        ]
+        let titleAttrString = NSMutableAttributedString(
+            string: "알림 시간 설정",
+            attributes: titleFont
+        )
+        let messageFont = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)
+        ]
+        let messageAttrString = NSMutableAttributedString(
+            string: "알림을 받고 싶은 시간을 선택하세요!",
+            attributes: messageFont
+        )
         
-        let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(
+            title: "",
+            message: "",
+            preferredStyle: .actionSheet
+        )
         actionSheet.setValue(titleAttrString, forKey: "attributedTitle")
         actionSheet.setValue(messageAttrString, forKey: "attributedMessage")
         
-        let hourAction = UIAlertAction(title: C.Reminder.options[60], style: .default) { (action) in
-            UserDefaults.standard.set(C.Reminder.hour, forKey: C.UserDefaultsKey.time)
+        let hourAction = UIAlertAction(
+            title: C.Reminder.options[60],
+            style: .default
+        ) { action in
+            UserDefaults.standard.set(
+                C.Reminder.hour,
+                forKey: C.UserDefaultsKey.time
+            )
             self.tableView.reloadData()
         }
-        let halfHourAction = UIAlertAction(title: C.Reminder.options[30], style: .default) { (action) in
-            UserDefaults.standard.set(C.Reminder.halfHour, forKey: C.UserDefaultsKey.time)
+        let halfHourAction = UIAlertAction(
+            title: C.Reminder.options[30],
+            style: .default
+        ) { action in
+            UserDefaults.standard.set(
+                C.Reminder.halfHour,
+                forKey: C.UserDefaultsKey.time
+            )
             self.tableView.reloadData()
         }
-        let tenMinAction = UIAlertAction(title: C.Reminder.options[10], style: .default) { (action) in
-            UserDefaults.standard.set(C.Reminder.tenMin, forKey: C.UserDefaultsKey.time)
+        let tenMinAction = UIAlertAction(
+            title: C.Reminder.options[10],
+            style: .default
+        ) { action in
+            UserDefaults.standard.set(
+                C.Reminder.tenMin,
+                forKey: C.UserDefaultsKey.time
+            )
             self.tableView.reloadData()
         }
-        let setTimeAction = UIAlertAction(title: C.Reminder.options[0], style: .default) { (action) in
-            UserDefaults.standard.set(C.Reminder.setTime, forKey: C.UserDefaultsKey.time)
+        let setTimeAction = UIAlertAction(
+            title: C.Reminder.options[0],
+            style: .default
+        ) { action in
+            UserDefaults.standard.set(
+                C.Reminder.setTime,
+                forKey: C.UserDefaultsKey.time
+            )
             self.tableView.reloadData()
         }
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { (action) in
-        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
         
         actionSheet.addAction(setTimeAction)
         actionSheet.addAction(tenMinAction)
@@ -84,6 +124,7 @@ class DIInfoViewController: UIViewController {
         present(actionSheet, animated: true, completion: nil)
     }
     
+    /// 앱스토어 리뷰 요청하는 함수
     func isReviewToBeDisplayed(_ minCount: Int) -> Bool {
         let launchCount = UserDefaults.standard.integer(forKey: C.UserDefaultsKey.review)
         
@@ -103,10 +144,12 @@ extension DIInfoViewController: UITableViewDataSource, UITableViewDelegate {
         return 2
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         if section == C.InfoSection.setting {
-            return 1
+            return 3
         } else if section == C.InfoSection.about {
             return C.Info.infos.count
         } else {
@@ -114,24 +157,46 @@ extension DIInfoViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
         
         switch indexPath.section {
         
         case C.InfoSection.setting:
-            guard let cell: DISettingTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.settingCell, for: indexPath) as? DISettingTableViewCell else { return UITableViewCell() }
+            guard let cell: DISettingTableViewCell = tableView.dequeueReusableCell(
+                    withIdentifier: C.CellIdentifier.settingCell,
+                    for: indexPath
+            ) as? DISettingTableViewCell else { return UITableViewCell() }
             
-            cell.reminderLabel.text = "알림 시간"
-            if let time: Int = UserDefaults.standard.value(forKey: C.UserDefaultsKey.time) as? Int {
-                cell.setTimeLabel.text = C.Reminder.options[time]
-            } else {
-                cell.setTimeLabel.text = C.Reminder.options[10]
+            switch indexPath.row {
+            case 0:
+                cell.titleLabel.text = "알림 시간"
+                if let time: Int = UserDefaults.standard.value(
+                    forKey: C.UserDefaultsKey.time
+                ) as? Int {
+                    cell.descLabel.text = C.Reminder.options[time]
+                } else {
+                    cell.descLabel.text = C.Reminder.options[10]
+                }
+            case 1:
+                cell.titleLabel.text = "데이터 백업"
+                cell.descLabel.text = "iCloud에 저장"
+            case 2:
+                cell.titleLabel.text = "데이터 불러오기"
+                cell.descLabel.text = "마지막으로 백업했던 데이터"
+            default:
+                cell.titleLabel.text = "Error"
             }
             
             return cell
             
         case C.InfoSection.about:
-            guard let cell: DIInfoTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.infoCell, for: indexPath) as? DIInfoTableViewCell else { return UITableViewCell() }
+            guard let cell: DIInfoTableViewCell = tableView.dequeueReusableCell(
+                    withIdentifier: C.CellIdentifier.infoCell,
+                    for: indexPath
+            ) as? DIInfoTableViewCell else { return UITableViewCell() }
             
             cell.infoLabel.text = C.Info.infos[indexPath.row]
             switch indexPath.row {
@@ -150,7 +215,10 @@ extension DIInfoViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(
+        _ tableView: UITableView,
+        titleForHeaderInSection section: Int
+    ) -> String? {
         switch section {
         case 0:
             return "설정"
@@ -161,20 +229,40 @@ extension DIInfoViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     /// 섹션헤더 배경색 바꾸는 함수
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor(named: "ViewColor")
+    func tableView(
+        _ tableView: UITableView,
+        willDisplayHeaderView view: UIView,
+        forSection section: Int
+    ) {
+        (view as! UITableViewHeaderFooterView)
+            .contentView
+            .backgroundColor = UIColor(named: "ViewColor")
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
         
         if indexPath.section == C.InfoSection.setting {
-            if indexPath.row == 0 {
+            
+            switch indexPath.row {
+            case 0:
                 setReminderTime()
                 tableView.reloadData()
+            case 1:
+                DIBackupManager.shared.uploadArchiveToCloud()
+            case 2:
+                DIBackupManager.shared.downloadArchiveFromCloud()
+            default:
+                print("Unknown Error")
             }
         }
         else if indexPath.section == C.InfoSection.about ,indexPath.row == 0 {
-            performSegue(withIdentifier: C.SegueIdentifier.onboardFromInfo, sender: nil)
+            performSegue(
+                withIdentifier: C.SegueIdentifier.onboardFromInfo,
+                sender: nil
+            )
         }
     }
 }

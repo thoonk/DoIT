@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DIOnboardViewController: UIViewController {
+final class DIOnboardViewController: UIViewController {
     // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var startedButton: UIButton!
@@ -15,7 +15,10 @@ class DIOnboardViewController: UIViewController {
     @IBAction func startedBtnTapped(_ sender: UIButton) {
         
         UserDefaults.standard.set(true, forKey: C.UserDefaultsKey.check)
-        performSegue(withIdentifier: C.SegueIdentifier.mainFromOnboard, sender: self)
+        performSegue(
+            withIdentifier: C.SegueIdentifier.mainFromOnboard,
+            sender: self
+        )
         
     }
     // MARK: - LifeCycle
@@ -34,12 +37,21 @@ class DIOnboardViewController: UIViewController {
 // MARK: - TableView
 extension DIOnboardViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         return C.Onboard.titles.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell: DIOnboardTableViewCell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.onboardCell, for: indexPath) as? DIOnboardTableViewCell else { return UITableViewCell() }
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        guard let cell: DIOnboardTableViewCell = tableView.dequeueReusableCell(
+                withIdentifier: C.CellIdentifier.onboardCell,
+                for: indexPath
+        ) as? DIOnboardTableViewCell else { return UITableViewCell() }
         
         cell.titleLabel.text = C.Onboard.titles[indexPath.row]
         cell.bodyLabel.text = C.Onboard.bodies[indexPath.row]

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DIDateTableViewCell: UITableViewCell {
+final class DIDateTableViewCell: UITableViewCell {
     
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
@@ -25,11 +25,5 @@ class DIDateTableViewCell: UITableViewCell {
         startDatePicker.locale = Locale(identifier: "en")
         endDatePicker.locale = Locale(identifier: "en")
         todayButton.setImage(UIImage(systemName: "calendar"), for: .normal)
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 }

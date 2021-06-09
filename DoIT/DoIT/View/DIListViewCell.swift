@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DIListViewCell: UITableViewCell {
+final class DIListViewCell: UITableViewCell {
 
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var completeButton: UIButton!

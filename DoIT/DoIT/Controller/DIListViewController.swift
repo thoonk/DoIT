@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class DIListViewController: UIViewController {
+final class DIListViewController: UIViewController {
     // MARK: - Properties
     var items: Results<DIItem>?
     let notiManager = DINotiManager()
@@ -17,19 +17,35 @@ class DIListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - IBAction
+    /// DetailVC으로 뷰 전환
     @IBAction func writeBtnPressed(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: C.SegueIdentifier.detailFromTable, sender: nil)
+        performSegue(
+            withIdentifier: C.SegueIdentifier.detailFromTable,
+            sender: nil
+        )
     }
-
+    /**
+     할 일 완료 버튼 누르면 실행되는 메서드
+     
+     false -> true
+     - 라벨에 취소선 긋기
+     - 로컬알림 삭제
+     - 채워진 원으로 바꾸기
+     
+     true -> false
+     - 빈 원으로 바꾸기
+     */
     @IBAction func completeBtnPressed(_ sender: UIButton) {
-        
         let contentView = sender.superview?.superview?.superview
         let cell: DIListViewCell = contentView?.superview as! DIListViewCell
         let indexPath = tableView.indexPath(for: cell)!
 
         if let item = items?[indexPath.row] {
             if item.isComplete == false {
-                sender.setImage(UIImage(systemName: "largecircle.fill.circle"), for: .normal)
+                sender.setImage(
+                    UIImage(systemName: "largecircle.fill.circle"),
+                    for: .normal
+                )
                 cell.titleLabel.attributedText = cell.titleLabel.text?.strikeThrough()
                 DINotiManager.shared.removeNoti(with: item.id)
             } else {
@@ -42,8 +58,8 @@ class DIListViewController: UIViewController {
     }
     
     // MARK: - LifeCycle
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor(named: "BackgroundColor")
@@ -63,7 +79,8 @@ class DIListViewController: UIViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == C.SegueIdentifier.detailFromTable {
-            if let vc = segue.destination as? DIDetailViewController, let item = sender as? DIItem {
+            if let vc = segue.destination as? DIDetailViewController,
+               let item = sender as? DIItem {
                 vc.item = item
             }
         }
@@ -73,7 +90,10 @@ class DIListViewController: UIViewController {
 // MARK: - TableView
 extension DIListViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         if self.items != nil {
             return self.items!.count
         } else {
@@ -85,13 +105,22 @@ extension DIListViewController: UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(
+        _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
         return 60
     }
     
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell: DIListViewCell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.tableCell, for: indexPath) as? DIListViewCell else {
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        guard let cell: DIListViewCell = tableView.dequeueReusableCell(
+                withIdentifier: C.CellIdentifier.tableCell,
+                for: indexPath
+        ) as? DIListViewCell else {
             return UITableViewCell()
         }
         if let data = self.items?[indexPath.row] {
@@ -106,27 +135,46 @@ extension DIListViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             if data.isComplete == true {
-                cell.completeButton.setImage(UIImage(systemName: "largecircle.fill.circle"), for: .normal)
+                cell.completeButton.setImage(
+                    UIImage(systemName: "largecircle.fill.circle"),
+                    for: .normal
+                )
                 cell.titleLabel.attributedText = cell.titleLabel.text?.strikeThrough()
             } else {
-                cell.completeButton.setImage(UIImage(systemName: "circle"), for: .normal)
+                cell.completeButton.setImage(
+                    UIImage(systemName: "circle"),
+                    for: .normal
+                )
             }
         }
         return cell
     }
     
     /// tableViewCell 오른쪽에서 왼쪽으로 스와이프해서 삭제
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
                 
         // 할 일 삭제
-        let deleteAction = UIContextualAction(style: .destructive, title: "") { (contextualAction, view, isSuccess) in
+        let deleteAction = UIContextualAction(
+            style: .destructive, title: ""
+        ) { contextualAction, view, isSuccess in
             DIItemManager.shared.deleteItem(with: (self.items?[indexPath.row])!)
             tableView.reloadData()
         }
         
-        deleteAction.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.0)
+        deleteAction.backgroundColor = UIColor.init(
+            red: 0/255.0,
+            green: 0/255.0,
+            blue: 0/255.0,
+            alpha: 0.0
+        )
         
-        let deleteIcon = UIImage(systemName: "delete.left")?.withTintColor(UIColor(named: "ImageColor")!, renderingMode: .alwaysOriginal)
+        let deleteIcon = UIImage(systemName: "delete.left")?.withTintColor(
+            UIColor(named: "ImageColor")!,
+            renderingMode: .alwaysOriginal
+        )
         
         deleteAction.image = deleteIcon
         
@@ -135,13 +183,22 @@ extension DIListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     /// tableViewCell 왼쪽에서 오른쪽으로 스와이프해서 하이라이트
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(
+        _ tableView: UITableView,
+        leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
         
         // 강조 / 강조 취소
-        let markAction = UIContextualAction(style: .normal, title: "") { (contextualAction, view, isSuccess) in
+        let markAction = UIContextualAction(
+            style: .normal,
+            title: ""
+        ) { contextualAction, view, isSuccess in
             
             DIItemManager.shared.updateMark(with: (self.items?[indexPath.row])!)
-            if let cell: DIListViewCell = tableView.dequeueReusableCell(withIdentifier: C.CellIdentifier.tableCell, for: indexPath) as? DIListViewCell {
+            if let cell: DIListViewCell = tableView.dequeueReusableCell(
+                withIdentifier: C.CellIdentifier.tableCell,
+                for: indexPath
+            ) as? DIListViewCell {
                 
                 if let item = self.items?[indexPath.row] {
                 
@@ -155,9 +212,17 @@ extension DIListViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.reloadData()
         }
         
-        markAction.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.0)
+        markAction.backgroundColor = UIColor.init(
+            red: 0/255.0,
+            green: 0/255.0,
+            blue: 0/255.0,
+            alpha: 0.0
+        )
 
-        let markIcon = UIImage(systemName: "star.fill")?.withTintColor(UIColor(named: "ImageColor")!, renderingMode: .alwaysOriginal)
+        let markIcon = UIImage(systemName: "star.fill")?.withTintColor(
+            UIColor(named: "ImageColor")!,
+            renderingMode: .alwaysOriginal
+        )
         
         markAction.image = markIcon
     
@@ -166,11 +231,17 @@ extension DIListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     // 선택된 cell의 정보로 DetailVC로 화면 전환
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if let item = self.items?[indexPath.row] {
-            performSegue(withIdentifier: C.SegueIdentifier.detailFromTable, sender: item)
+            performSegue(
+                withIdentifier: C.SegueIdentifier.detailFromTable,
+                sender: item
+            )
         }
     }
 }
